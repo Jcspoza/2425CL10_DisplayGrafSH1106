@@ -1,5 +1,9 @@
 # CL9 - uPython : Display Grafico mono 128x64 SH1106+RE+3sw : 1eros pasos - PyR 2024_25 CMM BML
 
+
+
+![](C:\Users\josec\OneDrive\Documentos\GitHub\2425CL10_DisplayGrafSH1106\sh1106RE3sw.png)
+
 Forma parte de la serie '**Workshop about Python and micropython with Pico W in CMM Benito**' Martin Madrid
 
 ## Clase 10 - Indice - 90 minutos
