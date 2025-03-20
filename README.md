@@ -16,6 +16,14 @@ Forma parte de la serie '**Workshop about Python and micropython with Pico W in 
 
 ### Conexiones - Config : i2c4_5
 
+
+
+<img title="" src="file:///C:/Users/josec/OneDrive/Documentos/GitHub/2425CL10_DisplayGrafSH1106/ReCircuit.gif" alt="" width="661">
+
+
+
+
+
 - <u>Display SH1106 I2C</u>
 
     I2C en GPIO 4&5 = SDA0 & SCL0 a 400khz
