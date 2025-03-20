@@ -1,7 +1,5 @@
 # CL9 - uPython : Display Grafico mono 128x64 SH1106+RE+3sw : 1eros pasos - PyR 2024_25 CMM BML
 
-
-
 ![](./sh1106RE3sw.png)
 
 Forma parte de la serie '**Workshop about Python and micropython with Pico W in CMM Benito**' Martin Madrid
@@ -19,6 +17,8 @@ Forma parte de la serie '**Workshop about Python and micropython with Pico W in 
 ----
 
 ### Conexiones - Config : i2c4_5
+
+
 
 <img title="" src="./ReCircuit.gif" alt="" width="661">
 
@@ -78,6 +78,24 @@ Cuando compramos HW nuevo en robotica hay que preguntarse ¿para que?, porque a 
 2. las 1.3 pulgadas lo hacen mas útil que el SSD1306 (que es muy popular, pero demasiado pequeño) para incorporar a proyectos en los que queramos tener gráficos o logos etc.
 
 #### Disponibilidad de librerías y Tutoriales
+
+## 
+
+## Avanzado - Circuitos RC para evitar rebotes
+
+
+
+![](C:\Users\josec\OneDrive\Documentos\GitHub\2425CL10_DisplayGrafSH1106\ReCircuit.gif)
+
+
+
+https://www.eejournal.com/article/ultimate-guide-to-switch-debounce-part-2/
+
+
+
+RC de bajada es = 100 ohm * 100nF = 10 us = a los 10usec el voltaje en condensadoor baja al 37% de Vcc = 1,21 que no es aun un '0' --> check
+
+Según el articulo los picos son de 1.5us de media y con máximo de 6.6 us, por los que los filtraría 
 
 ## Preguntas sobre la Clase 9 - 10 minutos
 
