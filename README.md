@@ -2,7 +2,7 @@
 
 
 
-![](C:\Users\josec\OneDrive\Documentos\GitHub\2425CL10_DisplayGrafSH1106\sh1106RE3sw.png)
+![](./sh1106RE3sw.png)
 
 Forma parte de la serie '**Workshop about Python and micropython with Pico W in CMM Benito**' Martin Madrid
 
