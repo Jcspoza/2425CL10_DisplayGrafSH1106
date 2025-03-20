@@ -85,7 +85,7 @@ Cuando compramos HW nuevo en robotica hay que preguntarse ¿para que?, porque a 
 
 
 
-![](C:\Users\josec\OneDrive\Documentos\GitHub\2425CL10_DisplayGrafSH1106\ReCircuit.gif)
+![](./ReCircuit.gif)
 
 
 
