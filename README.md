@@ -14,15 +14,44 @@ Forma parte de la serie '**Workshop about Python and micropython with Pico W in 
 
 ----
 
+### Conexiones - Config : i2c4_5
+
+- <u>Display SH1106 I2C</u>
+
+    I2C en GPIO 4&5 = SDA0 & SCL0 a 400khz
+
+- <u>Rotary encoder</u>
+
+    TRA en GPIO16
+
+    TRB en GPIO 17
+
+- <u>3 switchs </u>
+  
+  Confirm en GPIO18
+  
+  Back en GPIO19
+  
+  Push ( del Rotary encoder) en GPIO20
+
+```
+CONFIRM = 18
+BACK = 19
+PUSH = 20
+confPul = Pin(CONFIRM, Pin.IN) # pull up por circuito
+backPul = Pin(BACK, Pin.IN) # pull up por circuito
+pushPul = Pin(PUSH, Pin.IN) # pull up por circuito
+```
+
 ### Tabla resumen de programas
 
-| Programa - en uPython | Configuracion HW | Objetivo del basic HW test |
-| --------------------- | ---------------- | -------------------------- |
-|                       |                  |                            |
-|                       |                  |                            |
-|                       |                  |                            |
-|                       |                  |                            |
-|                       |                  |                            |
+| Programa - en uPython                | Configuración HW | Objetivo del basic HW test |
+| ------------------------------------ | ---------------- | -------------------------- |
+| [Rbhwt_I2Cscan.py](Rbhwt_I2Cscan.py) |                  |                            |
+|                                      |                  |                            |
+|                                      |                  |                            |
+|                                      |                  |                            |
+|                                      |                  |                            |
 
 ### Recomendaciones de estudio despues de la clase
 
@@ -42,15 +71,7 @@ Cuando compramos HW nuevo en robotica hay que preguntarse ¿para que?, porque a 
 
 2. las 1.3 pulgadas lo hacen mas útil que el SSD1306 (que es muy popular, pero demasiado pequeño) para incorporar a proyectos en los que queramos tener gráficos o logos etc.
 
-
-
 #### Disponibilidad de librerías y Tutoriales
-
-
-
-
-
-
 
 ## Preguntas sobre la Clase 9 - 10 minutos
 
