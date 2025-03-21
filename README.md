@@ -18,9 +18,13 @@ Forma parte de la serie '**Workshop about Python and micropython with Pico W in 
 
 ### Conexiones - Config : i2c4_5
 
-
-
 <img title="" src="./ReCircuit.gif" alt="" width="661">
+
+- <u>Alimentacion</u>
+  
+  VCC -> +3,3volt  de la pico 
+  
+  GNN -> GND de la Pico
 
 - <u>Display SH1106 I2C</u>
 
@@ -51,13 +55,13 @@ pushPul = Pin(PUSH, Pin.IN) # pull up por circuito
 
 ### Tabla resumen de programas
 
-| Programa - en uPython                | Configuración HW | Objetivo del basic HW test |
-| ------------------------------------ | ---------------- | -------------------------- |
-| [Rbhwt_I2Cscan.py](Rbhwt_I2Cscan.py) |                  |                            |
-|                                      |                  |                            |
-|                                      |                  |                            |
-|                                      |                  |                            |
-|                                      |                  |                            |
+| Programa - en uPython                | Configuración HW                       | Objetivo del basic HW test                                   |
+| ------------------------------------ | -------------------------------------- | ------------------------------------------------------------ |
+| [Rbhwt_I2Cscan.py](Rbhwt_I2Cscan.py) | I2C en GPIO 4&5 = SDA0 & SCL0 a 400khz | Check de que el bus I2c esta ok, la dirección debe ser la 60 |
+|                                      |                                        |                                                              |
+|                                      |                                        |                                                              |
+|                                      |                                        |                                                              |
+|                                      |                                        |                                                              |
 
 ### Recomendaciones de estudio despues de la clase
 
@@ -83,17 +87,11 @@ Cuando compramos HW nuevo en robotica hay que preguntarse ¿para que?, porque a 
 
 ## Avanzado - Circuitos RC para evitar rebotes
 
-
-
 ![](./ReCircuit.gif)
-
-
 
 https://www.eejournal.com/article/ultimate-guide-to-switch-debounce-part-2/
 
-
-
-RC de bajada es = 100 ohm * 100nF = 10 us = a los 10usec el voltaje en condensadoor baja al 37% de Vcc = 1,21 que no es aun un '0' --> check
+RC de bajada es = 100 ohm * 100nF = 10 us =>> a los 10usec el voltaje en condensador baja al 37% de Vcc = 1,21 que no es aun un '0' --> check
 
 Según el articulo los picos son de 1.5us de media y con máximo de 6.6 us, por los que los filtraría 
 
