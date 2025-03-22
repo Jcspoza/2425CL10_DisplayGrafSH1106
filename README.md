@@ -74,7 +74,7 @@ Copyright (c) :
 
 ### Conexiones - Configuración : i2c4_5
 
-![](C:\Users\josec\OneDrive\Documentos\GitHub\2425CL10_DisplayGrafSH1106\conector_sh1106.png)
+![](./conector_sh1106.png)
 
 * <u>Alimentación</u>
 
