@@ -177,7 +177,7 @@ Hay 3 tipos de hw a considerar luego habrá 3 objetivos 1  x cada hw. Adicionalm
 
 Con un montaje Hw nuevo conviene siempre empezar comprobando que lo básico funciona. En el caso del display lo que ha de funcionar es el bus I2C es decir que el microcontrolador ***vea*** el display.
 
-El programa de test I2c lo hemos usado más de una vez asi que hay poco que comentar. Veamso el resultado
+El programa de test I2c lo hemos usado más de una vez asi que hay poco que comentar. Veamos el resultado
 
 ```
 uPython version: v1.25.0-preview.73.g406bccc75 on 2024-12-03 (GNU 13.2.0 MinSizeRel) 
@@ -191,6 +191,63 @@ Decimal address: 60 , Hex address:  0x3c
 ```
 
 #### 2.Test básico SH1106
+
+El objetivo es tener un programa que muestre en el display un texto y una figura geométrica para estar seguros, no solo de que el bus I2C del display funciona, sino que funciona el propio display.
+
+Veamos como se inicializa el display , como se le ordena la escritura de textos y el dibujo del cuadrado
+
+```
+    # 1- Creacion del objeto display
+    display = sh1106.SH1106_I2C(WIDTH,
+                                HEIGHT,
+                                i2c,
+                                res = None,
+                                addr = 0x3c,
+                                rotate = 0) # valores 0, 90, 180, 270
+    # 2 inicializacion
+    display.sleep(False)
+    display.fill(0)
+    # 3. escribir text
+    display.text('Test JCSP 07mr25', 0, 0, 1)
+    # 4. dibujar cuadrado
+    display.rect(WIDTH//4 - 10, HEIGHT//2 - 8, 20, 16, 1) # x0, y0, size hor, size vert , color
+    # 5 mostrar los ultimos cambios
+    display.show()
+```
+
+1) En la creación del objeto se pasan los parámetros de:
+- anchura y altura del display, 
+
+- el objeto bus i2c recién creado, 
+
+- que el display usado no tiene pin de reset ( ver al final información sobre este tema avanzado)
+
+- la dirección i2c (cuidado si el bus se comparte) 
+
+- la rotación a 0º. Las rotaciones a 90º y 270º son problemáticas. mejor usar el display en apaisado
+2. Inicialización
+   
+   sleep a False activa el display
+   
+   fill(0) : es decirle al display que llene todo el display del color etiquetado como '0' es decir no color
+   
+   fill(1) indicaría todo el display en blanco
+
+3. Escribir texto
+   
+   las coordenadas se cuentan desde la esquina superior izquierda como 0,0
+   
+   El color 1, corresponde a 'iluminar led' = blanco
+
+4. Dibujar cuadrado
+   
+   Los parámetros para dibujar cuadrado son x0, y0, size hor, size vert , color
+
+5. Mostrar los últimos cambios
+   
+   El display al estar basado en frame buffer, no ejecuta los cambios directamente, sino que  tiene una memoria copia de la pantalla, que es donde se hacen los cambios y con show() se vuelcan
+
+
 
 ### Estudio de RE
 
