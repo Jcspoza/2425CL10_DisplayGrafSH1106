@@ -6,7 +6,7 @@ Forma parte de la serie '**Workshop about Python and micropython with Pico W in 
 
 Esta clase es más el reflejo de una investigación que un resultado cerrado.
 
-<u>Importante : este estudio **usara librerías básicas** y no librerías GUI</u> como   [nano-gui widget library](https://github.com/peterhinch/micropython-nano-gui), (que incluyen este display) . El estudio de librerias GUI se queda para otra clase
+<u>Importante : este estudio **usara librerías básicas** y no librerías GUI</u> como   [nano-gui widget library](https://github.com/peterhinch/micropython-nano-gui), (que incluyen este modelo de display entre los que son capaces de manejar) . El estudio de librerías con GUI se queda para otra clase
 
 ## Clase 10 - Indice - xx minutos
 
@@ -171,7 +171,24 @@ Hay 3 tipos de hw a considerar luego habrá 3 objetivos 1  x cada hw. Adicionalm
 
 ### Estudio del display con BHWT
 
-#### 1.Test del I2c
+#### 1.Test del I2c => el uC 've' el display
+
+[Rbhwt_I2Cscan.py](Rbhwt_I2Cscan.py)
+
+Con un montaje Hw nuevo conviene siempre empezar comprobando que lo básico funciona. En el caso del display lo que ha de funcionar es el bus I2C es decir que el microcontrolador ***vea*** el display.
+
+El programa de test I2c lo hemos usado más de una vez asi que hay poco que comentar. Veamso el resultado
+
+```
+uPython version: v1.25.0-preview.73.g406bccc75 on 2024-12-03 (GNU 13.2.0 MinSizeRel) 
+uC: Raspberry Pi Pico2 with RP2350 - Key other HW: I2C en GPIO 4&5 = SDA0 & SCL0 400khz
+Program: Test HW basico Scan bus i2c - Version: 1.0
+Key Library: Nothing
+I2C(0, freq=400000, scl=5, sda=4, timeout=50000)
+Scanning I2C bus.
+1 devices found.
+Decimal address: 60 , Hex address:  0x3c
+```
 
 #### 2.Test básico SH1106
 
@@ -189,7 +206,7 @@ Hay 3 tipos de hw a considerar luego habrá 3 objetivos 1  x cada hw. Adicionalm
 
 https://www.eejournal.com/article/ultimate-guide-to-switch-debounce-part-2/
 
-Una vez la alimentación estabilizada, el voltaje del condensador esta en 3,3volt . Un avez se pulsa el pulsador se activa el RC de bajada es = 100 ohm * 100nF = 10 us =>> a los 10usec el voltaje en condensador baja al 37% de Vcc = 1,21 que no es aun un '0' --> check
+Una vez la alimentación estabilizada, el voltaje del condensador esta en 3,3volt . Una vez se pulsa el pulsador se activa el RC de bajada es = 100 ohm * 100nF = 10 us =>> a los 10usec el voltaje en condensador baja al 37% de Vcc = 1,21 que no es aun un '0' --> check
 
 Según el articulo los picos son de 1.5us de media y con máximo de 6.6 us, por los que los filtraría 
 
