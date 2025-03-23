@@ -195,7 +195,7 @@ Hay 3 tipos de hw a considerar luego habrá 3 objetivos 1  x cada hw. Adicionalm
 
 ## Avanzado - Circuitos RC para evitar rebotes
 
-![](C:\Users\josec\OneDrive\Documentos\GitHub\2425CL10_DisplayGrafSH1106\push.png)
+![](./push.png)
 
 https://www.eejournal.com/article/ultimate-guide-to-switch-debounce-part-2/
 
