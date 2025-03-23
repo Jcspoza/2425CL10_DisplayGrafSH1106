@@ -92,13 +92,13 @@ El circuito se muestra abajo:
 
 * El I2c va con pull-ups de 10K
 
-<img src="file:///C:/Users/josec/OneDrive/Documentos/GitHub/2425CL10_DisplayGrafSH1106/oled_sh1106.png" title="" alt="" width="340">
+<img src="./oled_sh1106.png" title="" alt="" width="340">
 
 - <u>Rotary encoder</u>
 
 De nuevo va con pull -ups y además incluye un circuito RC para alisar los rebotes
 
-![](C:\Users\josec\OneDrive\Documentos\GitHub\2425CL10_DisplayGrafSH1106\RE.png)
+![](./RE.png)
 
     TRA en **GPIO16**
 
