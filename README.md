@@ -50,7 +50,7 @@ El mejor que he encontrado , pero es para ESP32 aunque creo que el codigo deberi
 
 [011 - MicroPython TechNotes: 1.3 OLED Display | TechToTinker](https://techtotinker.com/2021/02/10/011-micropython-technotes-1-3-oled-display/)
 
-Otros con l aPico
+Otros con el uC Pico
 
 No esta mal : [Using various SSD1306 and SH1106 128x64 OLED displays on a RaspberryPi Pico with micropython - YouTube](https://youtu.be/3TYohlerwaY?si=TxRBgxzFvRkL3fF4)
 
@@ -235,19 +235,64 @@ Veamos como se inicializa el display , como se le ordena la escritura de textos 
 
 3. Escribir texto
    
+   `display.text('Test JCSP 07mr25', 0, 0, 1)`
+   
    las coordenadas se cuentan desde la esquina superior izquierda como 0,0
    
-   El color 1, corresponde a 'iluminar led' = blanco
+   ![](C:\Users\josec\OneDrive\Documentos\GitHub\2425CL10_DisplayGrafSH1106\PantallOledCoor.png)
+   
+   
 
-4. Dibujar cuadrado
+4. El color 1, corresponde a 'iluminar led' = blanco
+
+5. Dibujar cuadrado
+   
+   `display.rect(WIDTH//4 - 10, HEIGHT//2 - 8, 20, 16, 1)`
    
    Los parámetros para dibujar cuadrado son x0, y0, size hor, size vert , color
-
-5. Mostrar los últimos cambios
    
-   El display al estar basado en frame buffer, no ejecuta los cambios directamente, sino que  tiene una memoria copia de la pantalla, que es donde se hacen los cambios y con show() se vuelcan
+   HEIGHT//2 es división entera de la altura del display , es decir 32 en este caso
 
+6. Mostrar los últimos cambios
+   
+   `display.show()`
+   
+   El display al estar basado en framebuffer ( concretamente de `framebuf.FrameBuffer` ) , no ejecuta los cambios directamente, sino que  tiene una memoria copia de la pantalla, que es donde se hacen los cambios y con show() se vuelcan
 
+Una vez ejecutado este test básico como el objeto display se queda 'vivo' se pueden probar otros métodos de dibujo y de texto en el display. Recordar que siempre hay que acabar con `display.show()` para mostrar los últimos cambios.
+
+A continuacion unos ejemplos de comandos a ejecutar en REPL
+
+```
+# The following codes should be tested using the REPL.
+# #1. To print a string:  
+# display.text('Hello world', 0, 0)
+# #2. To display all the commands in queue:     
+# display.show() 
+# #3. Now to clear the oled display:  
+# display.fill(0) 
+# display.show() 
+# #4. You may also use the invert function to invert the display.  
+# display.invert(1) 
+# #5.To display a single pixel.  
+# display.pixel(10,20,1) 
+# display.show() 
+# #6. To display a horizontal line  
+# display.hline(30,40,10,1) 
+# display.show() 
+# #7. To display a vertical line  
+# display.vline(30,45,5,1) 
+# display.show() 
+# #8. While hline and vline is quite useful, there is another function that is more flexible to use which is the line function.  
+# display.line(0,50,10,50,1) 
+# display.show() 
+# #9.We may also be able to print a rectangle.  
+# display.rect(10,60,10,5,1) 
+# display.show() 
+# #10. Or we may also print a filled rectangle:  
+# display.fill_rect(10,70,10,5,1) 
+# display.show()
+```
 
 ### Estudio de RE
 
