@@ -161,8 +161,6 @@ Ver arriba: **conclusión hay suficientes librerías y estan bien documentadas**
 
 Hay 3 tipos de hw a considerar luego habrá 3 objetivos 1  x cada hw. Adicionalmente con el display exploraremos mas tipos de letras:
 
-
-
 1. Display : clonar todos los BHWT de ssd1306
 
 2. RE : funcionamiento básico de Re con libreria
@@ -175,15 +173,7 @@ Hay 3 tipos de hw a considerar luego habrá 3 objetivos 1  x cada hw. Adicionalm
 
 #### 1.Test del I2c
 
-
-
 #### 2.Test básico SH1106
-
-
-
-
-
-
 
 ### Estudio de RE
 
