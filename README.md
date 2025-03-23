@@ -239,7 +239,7 @@ Veamos como se inicializa el display , como se le ordena la escritura de textos 
    
    las coordenadas se cuentan desde la esquina superior izquierda como 0,0
    
-   ![](C:\Users\josec\OneDrive\Documentos\GitHub\2425CL10_DisplayGrafSH1106\PantallOledCoor.png)
+   ![](./PantallOledCoor.png)
    
    
 
