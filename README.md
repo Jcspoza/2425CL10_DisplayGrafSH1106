@@ -130,12 +130,28 @@ pushPul = Pin(PUSH, Pin.IN) # pull up por circuito
 | Programa - en uPython                      | Configuración HW                                 | Objetivo del basic HW test                                         |
 | ------------------------------------------ | ------------------------------------------------ | ------------------------------------------------------------------ |
 | [Rbhwt_I2Cscan.py](Rbhwt_I2Cscan.py)       | I2C en GPIO 4&5 = SDA0 & SCL0 a 400khz := i2c4_5 | Check de que el bus I2c esta ok, la dirección debe ser la 60, 0x3c |
-| [Rbhwt_sh1106_1_0.py](Rbhwt_sh1106_1_0.py) | i2c4_5                                           | 1er test: muestra un texto y un cuadrado                           |
-|                                            |                                                  |                                                                    |
-|                                            |                                                  |                                                                    |
-|                                            |                                                  |                                                                    |
+| [Rbhwt_sh1106_1_0.py](Rbhwt_sh1106_1_0.py) | i2c4_5                                           | Test T1: muestra un texto y un cuadrado                            |
+| Rbhwt_sh1106_tylogo1_0.py                  |                                                  | T1.2: logo hecho con rectángulos + texto                           |
+| Rbhwt_sh1106_lines_1_0.py                  |                                                  | T1.3: fuente standar escribir las 8 lineas de ancho                |
+| Rbhwt_sh1106_blit_1_0.py                   |                                                  | Test de sub-cuadros de frambuffer                                  |
+| Rbhwt_sh1106_img_file_1_0.py               |                                                  | AVANZADO Muestra una imagen del fichero 'cab90gmono2.pbm'          |
+| cab90gmono2.pbm                            |                                                  | AVANZADO : imagen ver anterior                                     |
+| Rbhwt_sh1106_shhowGraph_1_0.py             |                                                  | Muestra un show de comandos gráficos de framebuffer                |
+| sh1106.py                                  |                                                  | Libreria para el display SH1106                                    |
+| writer.py                                  |                                                  | Libreria complemento para escribir con varios tipos de letra       |
+| freesans20.py                              |                                                  | Fuente d eletra tamaño 20 para usar con writer                     |
+| Rbhwt_sh1106_writer_1_0.py                 |                                                  | Test de la libreria writer con freesans20                          |
+| Rbhwt_sh1106RE3sw_Test3sw1_0.py            |                                                  | Test de los 3 pulsadores usando interrupciones                     |
+| renc_t2.py                                 | R. Encoder GPIO16 & 17                           | Tre1 : superbasico de RE                                           |
+| renc_lib_t1.py                             | R. Encoder GPIO16 & 17                           | Tre2: básico con libreria                                          |
+| renc_lib_simple_limit.py                   | R. Encoder GPIO16 & 17                           | Tre3: libreria con limites de incremento                           |
+| renc_lib_simple_nolimit.py                 | R. Encoder GPIO16 & 17                           | Tre4: libreria sin limites                                         |
 
-### Recomendaciones de estudio despues de la clase
+```
+
+```
+
+## Recomendaciones de estudio despues de la clase
 
 Tutoriales ya indicados
 
@@ -240,8 +256,6 @@ Veamos como se inicializa el display , como se le ordena la escritura de textos 
    las coordenadas se cuentan desde la esquina superior izquierda como 0,0
    
    ![](./PantallOledCoor.png)
-   
-   
 
 4. El color 1, corresponde a 'iluminar led' = blanco
 
@@ -318,4 +332,4 @@ Sección para que los alumnos pregunten sus dudas durante la clase
 
 ---
 
-TO DO : Estudiar circuitos RC para evitar rebotes con un prototipo 
+TO DO : Estudiar circuitos RC para evitar rebotes con un prototipo
