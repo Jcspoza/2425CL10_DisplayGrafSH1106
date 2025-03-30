@@ -1,4 +1,4 @@
-# CL10 - uPython : Display Grafico mono 128x64 SH1106+RE+3sw : 1eros pasos ( no GUI) - PyR 2024_25 CMM BML
+# CL10 - uPython : Display Grafico mono 128x64 SH1106+RE+3sw : 1eros pasos (no GUI) - PyR 2024_25 CMM BML
 
 ![](./sh1106RE3sw.png)
 
@@ -6,25 +6,39 @@ Forma parte de la serie '**Workshop about Python and micropython with Pico W in 
 
 Esta clase es más el reflejo de una investigación que un resultado cerrado.
 
-<u>Importante : este estudio **usara librerías básicas** y no librerías GUI</u> como   [nano-gui widget library](https://github.com/peterhinch/micropython-nano-gui), (que incluyen este modelo de display entre los que son capaces de manejar) . El estudio de librerías con GUI se queda para otra clase
+<u>Importante : este estudio **usara librerías básicas** y no librerías GUI</u> (Graphic User Interface) como   [nano-gui widget library](https://github.com/peterhinch/micropython-nano-gui), (que incluyen este modelo de display entre los que son capaces de manejar) y [micro-gui: A lightweight MicroPython GUI library for display drivers which allows input via pushbuttons](https://github.com/peterhinch/micropython-micro-gui). El estudio de librerías con GUI, crea diseños elegantes para los proyectos complejos, diríamos que son diseños profesionales y minimiza la programación. Pero :
 
-## Clase 10 - Indice - xx minutos
+1. al añadir capas y capas de abstracción, hace que se pierda el contacto con el HW; 
+
+2. Incluye además programación asíncrona que es compleja
+
+3. La puesta en marcha y carga de las librerías es compleja y no exenta de problemas ( propia experiencia)
+
+4. etc.
+
+Llegaremos a estudiar las librerías de display con GUI, pero en una clase posterior, y cuando se haya practicado con guizero o pygame
+
+## 2024-2025 Clase 10 - Indice - xx minutos
 
 - Info previa: Tutoriales, Librerías, Conexionado y Programas que vamos a seguir
 
 - Estudio del SH1106 + RE + 3pulsadores con Pico
   
   - Antes de comprar
+    
+    - ¿Para qué?
+    
+    - Comprobar la disponibilidad de librerías y Tutoriales
   
   - Plantearse objetivos iniciales
     
-    - Display : clonar todos los BHWT de ssd1306
+    - Display : clonar todos los Basic HW Test de ssd1306
     
-    - RE : funcionamiento básico de Re con libreria
+    - Rotray Encoder : funcionamiento básico de Re con libreria
     
-    - Pulsadores : probar
+    - Pulsadores : probar con programas típicos de pulsador con interrupciones
     
-    - Letras con tamaños y fuentes disntintas
+    - Letras con tamaños y fuentes distintas: librería writer
   
   - Estudio del display con BHWT
   
@@ -58,7 +72,9 @@ No es gran cosa : [Raspberry Pi Pico/MicroPython exercise using SH1106 I2C OLED]
 
 ### Librería resumen
 
-Parece ser la unica que hay , junto la la de  [nano-gui widget library](https://github.com/peterhinch/micropython-nano-gui)
+#### Display - librería básica
+
+Parece ser la única que hay , junto la la de  [nano-gui widget library](https://github.com/peterhinch/micropython-nano-gui)
 
 [GitHub - robert-hh/SH1106: MicroPython driver for the SH1106 OLED controller](https://github.com/robert-hh/SH1106)
 
@@ -69,6 +85,14 @@ Copyright (c) :
 - 2017-2021 Robert Hammelrath (@robert-hh)
 
 - 2021 Tim Weber (@scy)
+
+#### Display - Libreria ampliar fuentes
+
+La libreria del display al basarse en framebuffer (explicación larga), solo maneja fuentes de 8x8. Para usar otras fuentes emplearemos la libreria writer, que esta dentro de :
+
+ [micropython-font-to-py/writer/WRITER.md at master · peterhinch/micropython-font-to-py · GitHub](https://github.com/peterhinch/micropython-font-to-py/blob/master/writer/WRITER.md), 
+
+que aunque diseñada para los GUI mencionados anteriormente, se puede usar sola.
 
 ----
 
@@ -331,5 +355,3 @@ Según el articulo los picos son de 1.5us de media y con máximo de 6.6 us, por 
 Sección para que los alumnos pregunten sus dudas durante la clase
 
 ---
-
-TO DO : Estudiar circuitos RC para evitar rebotes con un prototipo
