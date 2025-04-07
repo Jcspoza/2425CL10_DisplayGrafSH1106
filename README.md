@@ -172,27 +172,25 @@ pushPul = Pin(PUSH, Pin.IN) # pull up por circuito
 
 ### Tabla resumen de librerías y programas ( tipo ejemplos o BHWT)
 
-| Programa - en uPython                                          | Configuración HW                                 | Objetivo del basic HW test                                                  |
-| -------------------------------------------------------------- | ------------------------------------------------ | --------------------------------------------------------------------------- |
-| [Rbhwt_I2Cscan.py](Rbhwt_I2Cscan.py)                           | I2C en GPIO 4&5 = SDA0 & SCL0 a 400khz := i2c4_5 | Check de que el bus I2c esta ok, la dirección debe ser la 60, o en hex 0x3c |
-| [Rbhwt_sh1106_1_0.py](Rbhwt_sh1106_1_0.py)                     | i2c4_5                                           | Test T1: muestra un texto y un cuadrado                                     |
-| [Rbhwt_sh1106_writer_1_0.py](Rbhwt_sh1106_writer_1_0.py)       | i2c4_5                                           | Test # 1 de la libreria writer con freesans20 o inkfree20                   |
-| [Rbhwt_sh1106_showGraph_1_0.py](Rbhwt_sh1106_showGraph_1_0.py) | i2c4_5                                           | Muestra un show de comandos gráficos de framebuffer                         |
-| Rbhwt_sh1106RE3sw_Test3sw1_0.py                                |                                                  | Test de los 3 pulsadores usando interrupciones                              |
-|                                                                |                                                  |                                                                             |
-|                                                                |                                                  |                                                                             |
-| Rbhwt_sh1106_tylogo1_0.py                                      |                                                  | T1.2: logo hecho con rectángulos + texto                                    |
-| Rbhwt_sh1106_lines_1_0.py                                      |                                                  | T1.3: fuente standar escribir las 8 lineas de ancho                         |
-| Rbhwt_sh1106_blit_1_0.py                                       |                                                  | Test de sub-cuadros de frambuffer                                           |
-| Rbhwt_sh1106_img_file_1_0.py                                   |                                                  | AVANZADO Muestra una imagen del fichero 'cab90gmono2.pbm'                   |
-| cab90gmono2.pbm                                                |                                                  | AVANZADO : imagen ver anterior                                              |
-|                                                                |                                                  | Muestra un show de comandos gráficos de framebuffer                         |
-|                                                                |                                                  |                                                                             |
-|                                                                |                                                  |                                                                             |
-| renc_t2.py                                                     | R. Encoder GPIO16 & 17                           | Tre1 : super básico de RE                                                   |
-| renc_lib_t1.py                                                 | R. Encoder GPIO16 & 17                           | Tre2: básico con libreria                                                   |
-| renc_lib_simple_limit.py                                       | R. Encoder GPIO16 & 17                           | Tre3: libreria con limites de incremento                                    |
-| renc_lib_simple_nolimit.py                                     | R. Encoder GPIO16 & 17                           | Tre4: libreria sin limites                                                  |
+| Programa - en uPython                                              | Configuración HW                                 | Objetivo del basic HW test                                                  |
+| ------------------------------------------------------------------ | ------------------------------------------------ | --------------------------------------------------------------------------- |
+| [Rbhwt_I2Cscan.py](Rbhwt_I2Cscan.py)                               | I2C en GPIO 4&5 = SDA0 & SCL0 a 400khz := i2c4_5 | Check de que el bus I2c esta ok, la dirección debe ser la 60, o en hex 0x3c |
+| [Rbhwt_sh1106_1_0.py](Rbhwt_sh1106_1_0.py)                         | i2c4_5                                           | Test T1: muestra un texto y un cuadrado                                     |
+| [Rbhwt_sh1106_writer_1_0.py](Rbhwt_sh1106_writer_1_0.py)           | i2c4_5                                           | Test # 1 de la libreria writer con freesans20 o inkfree20                   |
+| [Rbhwt_sh1106_showGraph_1_0.py](Rbhwt_sh1106_showGraph_1_0.py)     | i2c4_5                                           | Muestra un show de comandos gráficos de framebuffer                         |
+| [Rbhwt_sh1106RE3sw_Test3sw1_0.py](Rbhwt_sh1106RE3sw_Test3sw1_0.py) | CONFIRM = GPIO18 / BACK = GPIO19 / PUSH = GPIO20 | Test de los 3 pulsadores usando interrupciones. NO usa el display           |
+| [Rbhwt_sh1106RE3sw_RE1_0.py](Rbhwt_sh1106RE3sw_RE1_0.py)           | TRA = GPIO16 / TRB = GPIO17                      | Test #1 Rotary Encoder con libreria.                                        |
+|                                                                    |                                                  |                                                                             |
+| **Programas secundarios**                                          | ----------                                       | --------------                                                              |
+| Rbhwt_sh1106_tylogo1_0.py                                          |                                                  | T1.2: logo hecho con rectángulos + texto                                    |
+| Rbhwt_sh1106_lines_1_0.py                                          |                                                  | T1.3: fuente standar escribir las 8 lineas de ancho                         |
+| Rbhwt_sh1106_blit_1_0.py                                           |                                                  | Test de sub-cuadros de frambuffer                                           |
+| Rbhwt_sh1106_img_file_1_0.py                                       |                                                  | AVANZADO Muestra una imagen del fichero 'cab90gmono2.pbm'                   |
+| cab90gmono2.pbm                                                    |                                                  | AVANZADO : imagen ver anterior                                              |
+|                                                                    |                                                  | Muestra un show de comandos gráficos de framebuffer                         |
+| renc_t2.py                                                         | R. Encoder GPIO16 & 17                           | Tre1 : super básico de RE                                                   |
+| renc_lib_simple_limit.py                                           | R. Encoder GPIO16 & 17                           | Tre3: libreria con limites de incremento                                    |
+| renc_lib_simple_nolimit.py                                         | R. Encoder GPIO16 & 17                           | Tre4: libreria sin limites                                                  |
 
 ```
 
@@ -324,7 +322,7 @@ Veamos como se inicializa el display , como se le ordena la escritura de textos 
 
 Una vez ejecutado este test básico como el objeto display se queda 'vivo' se pueden probar otros métodos de dibujo y de texto en el display. Recordar que siempre hay que acabar con `display.show()` para mostrar los últimos cambios.
 
-A continuacion unos ejemplos de comandos a ejecutar en REPL
+A continuación unos ejemplos de comandos a ejecutar en REPL
 
 ```
 # The following codes should be tested using the REPL.
