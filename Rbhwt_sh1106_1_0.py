@@ -1,5 +1,5 @@
 # Taller Programación y Robótica en CMM BML – 2024 -2025 - Clase xx
-# Programa: basic hw test sh1106 i2c - 1er test a hacer
+# Programa: hw test sh1106 i2c texto & graph - 1er test a hacer
 # Hardware platform: Pico _ & W / funciona igual sin cambios
 # Librerias : sh1106.py
 # Ref librerias: https://github.com/robert-hh/SH1106
@@ -9,7 +9,7 @@
 from os import uname
 # Informative block - start
 p_keyOhw = "I2C en GPIO 4&5 = SDA0 & SCL0 400khz"
-p_project = "Test HW basico sh1106 i2c -1er test"
+p_project = "Test HW basico sh1106: i2c, texto y grafico -1er test"
 p_version = "1.0"
 p_library = "SH1106  @robert-hh"
 print(f"uPython version: {uname()[3]} ")
@@ -41,6 +41,7 @@ else:
     for device in devices:
         print('Decimal address:', device, ", Hex address: ", hex(device))
         
+    # Creacion del objeto display
     display = sh1106.SH1106_I2C(WIDTH,
                                 HEIGHT,
                                 i2c,

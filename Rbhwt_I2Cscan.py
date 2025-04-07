@@ -1,11 +1,11 @@
 # Taller Programación y Robótica en CMM BML – 2024 -2025 - Clase xx
-# Programa: Scan del bus i2c
+# Programa: Test HW basico Scan bus i2c
 # Hardware platform: Pico _ & W / funciona igual sin cambios
-# Librerias : lcd_api.py + pico_i2c_lcd.py
-# Ref librerias: https://github.com/T-622/RPI-PICO-I2C-LCD
+# Librerias : 
+# Ref librerias: 
 # Fecha JCSP 2023 02 06
 # Licencia : CC BY-NC-SA 4.0
-# char REf https://maxpromer.github.io/LCD-Character-Creator/
+
 
 from os import uname
 # Informative block - start

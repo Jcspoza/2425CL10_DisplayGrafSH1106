@@ -2,19 +2,17 @@
 
 ![](./sh1106RE3sw.png)
 
-Forma parte de la serie '**Workshop about Python and micropython with Pico W in CMM Benito**' Martin Madrid.
+Forma parte de la serie '**Workshop about Python and micropython with Pico W in CMM Benito**' Martin Madrid. 
 
 Esta clase es más el reflejo de una investigación que un resultado cerrado.
 
-<u>Importante : este estudio **usara librerías básicas** y no librerías GUI</u> (Graphic User Interface) como   [nano-gui widget library](https://github.com/peterhinch/micropython-nano-gui), (que incluyen este modelo de display entre los que son capaces de manejar) y [micro-gui: A lightweight MicroPython GUI library for display drivers which allows input via pushbuttons](https://github.com/peterhinch/micropython-micro-gui). El estudio de librerías con GUI, crea diseños elegantes para los proyectos complejos, diríamos que son diseños profesionales y minimiza la programación. Pero :
+<u>Nota Importante : este estudio **usara librerías básicas** y no librerías GUI</u> (Graphic User Interface) como   [nano-gui widget library](https://github.com/peterhinch/micropython-nano-gui), (que incluyen este modelo de display entre los que son capaces de manejar) y [micro-gui: A lightweight MicroPython GUI library for display drivers which allows input via pushbuttons](https://github.com/peterhinch/micropython-micro-gui). El estudio de librerías con GUI, crea diseños elegantes para los proyectos complejos, diríamos que son diseños profesionales y minimiza la programación. Pero :
 
-1. al añadir capas y capas de abstracción, hace que se pierda el contacto con el HW; 
+1. Añadir capas y capas de abstracción, hace que se pierda el contacto con el HW; 
 
 2. Incluye además programación asíncrona que es compleja
 
-3. La puesta en marcha y carga de las librerías es compleja y no exenta de problemas ( propia experiencia)
-
-4. etc.
+3. La puesta en marcha y carga de las librerías es compleja y no exenta de problemas ( propia experiencia), etc.
 
 Llegaremos a estudiar las librerías de display con GUI, pero en una clase posterior, y cuando se haya practicado con guizero o pygame
 
@@ -40,7 +38,7 @@ Llegaremos a estudiar las librerías de display con GUI, pero en una clase poste
     
     - Letras con tamaños y fuentes distintas: librería writer
   
-  - Estudio del display con BHWT
+  - Estudio del display + escribir programas básicos de test (BHWT)
   
   - Estudio de RE
   
@@ -60,7 +58,7 @@ Llegaremos a estudiar las librerías de display con GUI, pero en una clase poste
 
 Algunos tutos:
 
-El mejor que he encontrado , pero es para ESP32 aunque creo que el codigo deberia valer en su mayor parte 
+El mejor que he encontrado , pero es para ESP32 aunque creo que el codigo debería valer en su mayor parte 
 
 [011 - MicroPython TechNotes: 1.3 OLED Display | TechToTinker](https://techtotinker.com/2021/02/10/011-micropython-technotes-1-3-oled-display/)
 
@@ -68,11 +66,24 @@ Otros con el uC Pico
 
 No esta mal : [Using various SSD1306 and SH1106 128x64 OLED displays on a RaspberryPi Pico with micropython - YouTube](https://youtu.be/3TYohlerwaY?si=TxRBgxzFvRkL3fF4)
 
-No es gran cosa : [Raspberry Pi Pico/MicroPython exercise using SH1106 I2C OLED](https://coxxect.blogspot.com/2022/08/raspberry-pi-picomicropython-exercise.html), usa un aversion antigua de la libreria. SIEMPRE ir a buscar al origen las librerias si es posible
+No es gran cosa : [Raspberry Pi Pico/MicroPython exercise using SH1106 I2C OLED](https://coxxect.blogspot.com/2022/08/raspberry-pi-picomicropython-exercise.html), usa una versión antigua de la libreria. SIEMPRE id a buscar al origen las librerías, si es posible
 
-### Librería resumen
+### Librerías resumen
 
-#### Display - librería básica
+..
+
+| Link a módulos                         | Link Github                                                                                                                                                                         | Notas - tutoriales                                                        | Libreria       |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------- |
+| [sh1106.py](sh1106.py)                 | [GitHub - robert-hh/SH1106: MicroPython driver for the SH1106 OLED controller](https://github.com/robert-hh/SH1106)                                                                 |                                                                           | Display SH1106 |
+| [writer.py](writer.py)                 | [micropython-font-to-py/writer/WRITER.md at master · peterhinch/micropython-font-to-py · GitHub](https://github.com/peterhinch/micropython-font-to-py/blob/master/writer/WRITER.md) | Programa principal de la libreria para escribir con varios tipos de letra | Writer         |
+| [freesans20.py](freesans20.py)         |                                                                                                                                                                                     | Fuente de letra tamaño 20 para usar con writer                            | Writer         |
+| [inkfree20.py](inkfree20.py)           |                                                                                                                                                                                     | Fuente de letra tamaño 20 para usar con writer. Generada por mi           | Writer         |
+| [rotary.py](rotary.py)                 | https://github.com/MikeTeachman/micropython-rotary                                                                                                                                  | Fichero core , independiente del uC                                       | Rotary Encoder |
+| [rotary_irq_rp2.py](rotary_irq_rp2.py) | https://github.com/MikeTeachman/micropython-rotary                                                                                                                                  | Fichero complementario dependiente del uC                                 | Rotary Encoder |
+
+...
+
+#### Display sh1106 - librería básica
 
 Parece ser la única que hay , junto la la de  [nano-gui widget library](https://github.com/peterhinch/micropython-nano-gui)
 
@@ -86,13 +97,23 @@ Copyright (c) :
 
 - 2021 Tim Weber (@scy)
 
-#### Display - Libreria ampliar fuentes
+#### Display writer - Libreria para ampliar fuentes
 
 La libreria del display al basarse en framebuffer (explicación larga), solo maneja fuentes de 8x8. Para usar otras fuentes emplearemos la libreria writer, que esta dentro de :
 
  [micropython-font-to-py/writer/WRITER.md at master · peterhinch/micropython-font-to-py · GitHub](https://github.com/peterhinch/micropython-font-to-py/blob/master/writer/WRITER.md), 
 
 que aunque diseñada para los GUI mencionados anteriormente, se puede usar sola.
+
+#### Rotary Encoder - Libreria básica
+
+Esta muy bien documentada en el readme de la libreria en github, en cuanto a como usa rla libreria.
+
+[GitHub - miketeachman/micropython-rotary: MicroPython module to read a rotary encoder.](https://github.com/MikeTeachman/micropython-rotary)
+
+**Conviene ver un tutorial de la mecánica de un RE**, vale cualquiera de los tutoriales hechos para arduino, como este 
+
+[Rotary Encoders &#8211; Prometec](https://www.prometec.net/rotary-encoders/)
 
 ----
 
@@ -112,7 +133,7 @@ que aunque diseñada para los GUI mencionados anteriormente, se puede usar sola.
 
 El circuito se muestra abajo:
 
-* Tiene un reset por RC
+* Tiene un reset por circuito RC, con lo que no hay que 'gastar' ningún pin para el reset.
 
 * El I2c va con pull-ups de 10K
 
@@ -128,7 +149,7 @@ De nuevo va con pull -ups y además incluye un circuito RC para alisar los rebot
 
     TRB en **GPIO 17**
 
-Nota : si al probar con la libreria de RE un programa por ejemplo de numero que se incrementa, estos se decrementan ==> hay que cambiar el orden de las conexiones
+Nota : si al probar con la libreria de Rotary Encoder un programa que, por ejemplo dé numero que se incrementa al girar el RE, pero vemos que el numero se decrementan ==> hay que cambiar el orden de las conexiones TRA y TRB
 
 - <u>3 switchs </u>
   
@@ -149,27 +170,29 @@ backPul = Pin(BACK, Pin.IN) # pull up por circuito
 pushPul = Pin(PUSH, Pin.IN) # pull up por circuito
 ```
 
-### Tabla resumen de programas
+### Tabla resumen de librerías y programas ( tipo ejemplos o BHWT)
 
-| Programa - en uPython                      | Configuración HW                                 | Objetivo del basic HW test                                         |
-| ------------------------------------------ | ------------------------------------------------ | ------------------------------------------------------------------ |
-| [Rbhwt_I2Cscan.py](Rbhwt_I2Cscan.py)       | I2C en GPIO 4&5 = SDA0 & SCL0 a 400khz := i2c4_5 | Check de que el bus I2c esta ok, la dirección debe ser la 60, 0x3c |
-| [Rbhwt_sh1106_1_0.py](Rbhwt_sh1106_1_0.py) | i2c4_5                                           | Test T1: muestra un texto y un cuadrado                            |
-| Rbhwt_sh1106_tylogo1_0.py                  |                                                  | T1.2: logo hecho con rectángulos + texto                           |
-| Rbhwt_sh1106_lines_1_0.py                  |                                                  | T1.3: fuente standar escribir las 8 lineas de ancho                |
-| Rbhwt_sh1106_blit_1_0.py                   |                                                  | Test de sub-cuadros de frambuffer                                  |
-| Rbhwt_sh1106_img_file_1_0.py               |                                                  | AVANZADO Muestra una imagen del fichero 'cab90gmono2.pbm'          |
-| cab90gmono2.pbm                            |                                                  | AVANZADO : imagen ver anterior                                     |
-| Rbhwt_sh1106_shhowGraph_1_0.py             |                                                  | Muestra un show de comandos gráficos de framebuffer                |
-| sh1106.py                                  |                                                  | Libreria para el display SH1106                                    |
-| writer.py                                  |                                                  | Libreria complemento para escribir con varios tipos de letra       |
-| freesans20.py                              |                                                  | Fuente d eletra tamaño 20 para usar con writer                     |
-| Rbhwt_sh1106_writer_1_0.py                 |                                                  | Test de la libreria writer con freesans20                          |
-| Rbhwt_sh1106RE3sw_Test3sw1_0.py            |                                                  | Test de los 3 pulsadores usando interrupciones                     |
-| renc_t2.py                                 | R. Encoder GPIO16 & 17                           | Tre1 : superbasico de RE                                           |
-| renc_lib_t1.py                             | R. Encoder GPIO16 & 17                           | Tre2: básico con libreria                                          |
-| renc_lib_simple_limit.py                   | R. Encoder GPIO16 & 17                           | Tre3: libreria con limites de incremento                           |
-| renc_lib_simple_nolimit.py                 | R. Encoder GPIO16 & 17                           | Tre4: libreria sin limites                                         |
+| Programa - en uPython                                          | Configuración HW                                 | Objetivo del basic HW test                                                  |
+| -------------------------------------------------------------- | ------------------------------------------------ | --------------------------------------------------------------------------- |
+| [Rbhwt_I2Cscan.py](Rbhwt_I2Cscan.py)                           | I2C en GPIO 4&5 = SDA0 & SCL0 a 400khz := i2c4_5 | Check de que el bus I2c esta ok, la dirección debe ser la 60, o en hex 0x3c |
+| [Rbhwt_sh1106_1_0.py](Rbhwt_sh1106_1_0.py)                     | i2c4_5                                           | Test T1: muestra un texto y un cuadrado                                     |
+| [Rbhwt_sh1106_writer_1_0.py](Rbhwt_sh1106_writer_1_0.py)       | i2c4_5                                           | Test # 1 de la libreria writer con freesans20 o inkfree20                   |
+| [Rbhwt_sh1106_showGraph_1_0.py](Rbhwt_sh1106_showGraph_1_0.py) | i2c4_5                                           | Muestra un show de comandos gráficos de framebuffer                         |
+| Rbhwt_sh1106RE3sw_Test3sw1_0.py                                |                                                  | Test de los 3 pulsadores usando interrupciones                              |
+|                                                                |                                                  |                                                                             |
+|                                                                |                                                  |                                                                             |
+| Rbhwt_sh1106_tylogo1_0.py                                      |                                                  | T1.2: logo hecho con rectángulos + texto                                    |
+| Rbhwt_sh1106_lines_1_0.py                                      |                                                  | T1.3: fuente standar escribir las 8 lineas de ancho                         |
+| Rbhwt_sh1106_blit_1_0.py                                       |                                                  | Test de sub-cuadros de frambuffer                                           |
+| Rbhwt_sh1106_img_file_1_0.py                                   |                                                  | AVANZADO Muestra una imagen del fichero 'cab90gmono2.pbm'                   |
+| cab90gmono2.pbm                                                |                                                  | AVANZADO : imagen ver anterior                                              |
+|                                                                |                                                  | Muestra un show de comandos gráficos de framebuffer                         |
+|                                                                |                                                  |                                                                             |
+|                                                                |                                                  |                                                                             |
+| renc_t2.py                                                     | R. Encoder GPIO16 & 17                           | Tre1 : super básico de RE                                                   |
+| renc_lib_t1.py                                                 | R. Encoder GPIO16 & 17                           | Tre2: básico con libreria                                                   |
+| renc_lib_simple_limit.py                                       | R. Encoder GPIO16 & 17                           | Tre3: libreria con limites de incremento                                    |
+| renc_lib_simple_nolimit.py                                     | R. Encoder GPIO16 & 17                           | Tre4: libreria sin limites                                                  |
 
 ```
 
@@ -185,13 +208,15 @@ Tutoriales ya indicados
 
 #### Para que
 
-Cuando compramos HW nuevo en robotica hay que preguntarse ¿para que?, porque a veces nos puede mas el deseo que la realidad del tiempo de que disponemos. De todas forma los componente no suelen ser caros, asi que el no comprar debe estar motiva mas en que no nos cuadre en lo que querremos experimentar o estudiar en un futuro cercano.
+Cuando compramos HW nuevo en robotica hay que preguntarse ¿para que?, porque a veces nos puede mas el deseo que la realidad del tiempo de que disponemos. De todas forma los componente no suelen ser caros, en este caso  unos 5 euros en aliexpres (abril 2025)
 
-**Caso SH1106 =>**
+**Caso SH1106 =>** para proyectos en los que queramos tener **texto + gráficos sin color**
 
-1. Estudiar el display gráfico más sencillo posible
+1. Es el display gráfico más sencillo posible junto al SSD1306
 
 2. las 1.3 pulgadas lo hacen mas útil que el SSD1306 (que es muy popular, pero demasiado pequeño) para incorporar a proyectos en los que queramos tener gráficos o logos etc.
+
+3. Incluye 3 pulsadores y un Rotary Encoder, que son suficientes para disponer de entradas de control en nuestro proyecto
 
 #### Comprobar la disponibilidad de librerías y Tutoriales
 
@@ -199,15 +224,15 @@ Ver arriba: **conclusión hay suficientes librerías y estan bien documentadas**
 
 ### Plantearse objetivos iniciales
 
-Hay 3 tipos de hw a considerar luego habrá 3 objetivos 1  x cada hw. Adicionalmente con el display exploraremos mas tipos de letras:
+Hay 3 tipos de hw a considerar en este producto, luego habrá 3 objetivos 1  x cada hw. Adicionalmente con el display exploraremos mas tipos de letras:
 
 1. Display : clonar todos los BHWT de ssd1306
 
-2. RE : funcionamiento básico de Re con libreria
+2. RE : funcionamiento básico del Rotary Encoder  con libreria
 
-3. Pulsadores : probar
+3. Pulsadores : probar con interrupciones
 
-4. Display objetivo adicional : Letras con tamaños y fuentes distintas
+4. Display objetivo adicional : Letras con tamaños y fuentes distintas libreria writer
 
 ### Estudio del display con BHWT
 
@@ -354,4 +379,4 @@ Según el articulo los picos son de 1.5us de media y con máximo de 6.6 us, por 
 
 Sección para que los alumnos pregunten sus dudas durante la clase
 
----
+---- 
