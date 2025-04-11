@@ -107,7 +107,7 @@ que aunque diseñada para los GUI mencionados anteriormente, se puede usar sola.
 
 #### Rotary Encoder - Libreria básica
 
-Esta muy bien documentada en el readme de la libreria en github, en cuanto a como usa rla libreria.
+Esta muy bien documentada en el readme de la libreria en github, en cuanto a como usar la libreria.
 
 [GitHub - miketeachman/micropython-rotary: MicroPython module to read a rotary encoder.](https://github.com/MikeTeachman/micropython-rotary)
 
@@ -170,7 +170,7 @@ backPul = Pin(BACK, Pin.IN) # pull up por circuito
 pushPul = Pin(PUSH, Pin.IN) # pull up por circuito
 ```
 
-### Tabla resumen de librerías y programas ( tipo ejemplos o BHWT)
+### Tabla resumen de programas ejemplos o Basic HW Test
 
 | Programa - en uPython                                              | Configuración HW                                 | Objetivo del basic HW test                                                  |
 | ------------------------------------------------------------------ | ------------------------------------------------ | --------------------------------------------------------------------------- |
@@ -180,21 +180,12 @@ pushPul = Pin(PUSH, Pin.IN) # pull up por circuito
 | [Rbhwt_sh1106_showGraph_1_0.py](Rbhwt_sh1106_showGraph_1_0.py)     | i2c4_5                                           | Muestra un show de comandos gráficos de framebuffer                         |
 | [Rbhwt_sh1106RE3sw_Test3sw1_0.py](Rbhwt_sh1106RE3sw_Test3sw1_0.py) | CONFIRM = GPIO18 / BACK = GPIO19 / PUSH = GPIO20 | Test de los 3 pulsadores usando interrupciones. NO usa el display           |
 | [Rbhwt_sh1106RE3sw_RE1_0.py](Rbhwt_sh1106RE3sw_RE1_0.py)           | TRA = GPIO16 / TRB = GPIO17                      | Test #1 Rotary Encoder con libreria.                                        |
-|                                                                    |                                                  |                                                                             |
 | **Programas secundarios**                                          | ----------                                       | --------------                                                              |
-| Rbhwt_sh1106_tylogo1_0.py                                          |                                                  | T1.2: logo hecho con rectángulos + texto                                    |
-| Rbhwt_sh1106_lines_1_0.py                                          |                                                  | T1.3: fuente standar escribir las 8 lineas de ancho                         |
-| Rbhwt_sh1106_blit_1_0.py                                           |                                                  | Test de sub-cuadros de frambuffer                                           |
-| Rbhwt_sh1106_img_file_1_0.py                                       |                                                  | AVANZADO Muestra una imagen del fichero 'cab90gmono2.pbm'                   |
-| cab90gmono2.pbm                                                    |                                                  | AVANZADO : imagen ver anterior                                              |
-|                                                                    |                                                  | Muestra un show de comandos gráficos de framebuffer                         |
-| renc_t2.py                                                         | R. Encoder GPIO16 & 17                           | Tre1 : super básico de RE                                                   |
+| [Rbhwt_sh1106RE3sw_RE0_0.py](Rbhwt_sh1106RE3sw_RE0_0.py)           | R. Encoder GPIO16 & 17                           | T_RE_0 : super básico de RE, se observa la secuencia de bits al girar       |
 | renc_lib_simple_limit.py                                           | R. Encoder GPIO16 & 17                           | Tre3: libreria con limites de incremento                                    |
 | renc_lib_simple_nolimit.py                                         | R. Encoder GPIO16 & 17                           | Tre4: libreria sin limites                                                  |
 
-```
-
-```
+ ...
 
 ## Recomendaciones de estudio despues de la clase
 
@@ -254,6 +245,8 @@ Decimal address: 60 , Hex address:  0x3c
 ```
 
 #### 2.Test básico SH1106
+
+[Rbhwt_sh1106_1_0.py](Rbhwt_sh1106_1_0.py)
 
 El objetivo es tener un programa que muestre en el display un texto y una figura geométrica para estar seguros, no solo de que el bus I2C del display funciona, sino que funciona el propio display.
 
@@ -355,11 +348,56 @@ A continuación unos ejemplos de comandos a ejecutar en REPL
 # display.show()
 ```
 
+#### 3.Test gráfico completo de  SH1106
+
+[Rbhwt_sh1106_showGraph_1_0.py](Rbhwt_sh1106_showGraph_1_0.py)
+
+El objetivo es tener un programa que muestre en el display casi todos los gráficos posibles. En realidad los métodos para dibujar gráficos son herencia de la libreria Framebuffer.
+
+El programa, despues de un mensaje de introducción, muestra en forma de carrusel una serie de figuras graficas  posibles y vuelve a empezar. A destacar un 'truco' de python en MENU, que guarda las funciones a ejecutar, diseñadas para mostrar rectángulos, triángulos etc.
+
+`orden = MENU[opcion]` almacena la función a ejecutar en orden
+
+`msgL8 = orden()` ejecuta la función almacenada en orden y recoge el mensaje de esa función
+
+```
+MENU = [show_rect,
+        show_circ,
+        show_ellipse,
+        show_triangle,
+        show_pentagono,
+        show_Frect,
+        show_QFellipse,
+        show_invert,
+        show_normal]
+.......
+try:
+    while True:
+        oledsh.fill(0)
+        oledsh.text("Test de graficos",0,0,1)
+        oledsh.show()
+        for opcion in range(len(MENU)):
+            orden = MENU[opcion]
+            msgL8 = orden()
+```
+
+### Letras con tamaños distintos
+
+El inconveniente de las librerías de display grafico basadas en frambuffer, es que solo cuentan , de forma nativa, con 1 tipo de letra de 8x8. Para ampliar los tipos de letras existe la libreria writer, que esta dentro de :
+
+[micropython-font-to-py/writer/WRITER.md at master · peterhinch/micropython-font-to-py · GitHub](https://github.com/peterhinch/micropython-font-to-py/blob/master/writer/WRITER.md)
+
+que aunque diseñada para los GUI mencionados mas arriba, se puede usar sola.
+
+El programa font to py es capaz de convertir fuentes residiendo en el sistema operativo windows del PC, a fuentes 'usables' con displays. Lo he probado con la fuente 'inkfree' con resultados OK. El github tiene amplia documentación. Ver ejemplo en 
+
+[Rbhwt_sh1106_writer_1_0.py](Rbhwt_sh1106_writer_1_0.py)
+
+---------
+
 ### Estudio de RE
 
 ### Check de Pulsadores
-
-### Letras con tamaños distintos
 
 ------
 

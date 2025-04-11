@@ -2,7 +2,7 @@
 # Programa: basic hw test Rotary Encoder con libreria - Test #1
 # Hardware platform: Pico _ & W / funciona igual sin cambios
 # Librerias : micropython-rotary
-# Ref librerias: https://github.com/MikeTeachman/micropython-rotary)
+# Ref librerias: https://github.com/MikeTeachman/micropython-rotary
 # Fecha JCSP 2023 02 06
 # Licencia : CC BY-NC-SA 4.0
 
