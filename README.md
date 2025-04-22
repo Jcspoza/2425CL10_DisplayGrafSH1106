@@ -439,11 +439,15 @@ o este en ingles
 
 En realidad el funcionamiento de un RE es muy sencillo, y se puede ver en este gif:
 
-Los pines TRA y TRB se conectan como una aguja de tocadiscos sobre los discos interior y exterior del dibujo, y estan con pull-up
+[es una idealización de la mecánica real]
 
-Cuando tocan la zona negra se conectan a GND, es decir 'blanco' 'blanco' = '00'
+* Los pines TRA y TRB se conectan como una aguja de tocadiscos sobre los discos interior y exterior del dibujo, y estan con pull-up
 
-Al estar las zonas negras decaladas la secuencia de cambio desde '11' indica el sentido del giro
+* Cuando tocan la zona negra se conectan a GND, es decir 'negro' -'negro' = '00'
+
+* En el giro **hay posiciones de reposo** TRA y TRB estan **en 'blanco'-'blanco'** = '11'
+
+* Al estar las zonas negras decaladas la secuencia de cambio desde reposo '11' indica el sentido del giro
 
 ![](./Incremental_directional_encoder.gif)
 
@@ -473,7 +477,7 @@ Secuencia de giro a la izquierda : 11 -> 10 -> 00 -> 01 -> 11
 
 Pero este programa es poco útil, porque hay que incluir  :
 
-* Evitación de rebotes
+* Evitación de rebotes por sofware
 
 * Interrupciones para manejar los cambios de los pines de RE
 
@@ -536,4 +540,4 @@ Cálculos de un rebote hacia a arriba despues de pulsar
 
 Sección para que los alumnos pregunten sus dudas durante la clase
 
----
+--- 
