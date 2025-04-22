@@ -449,7 +449,7 @@ Al estar las zonas negras decaladas la secuencia de ca,bio desde '11' indica el 
 
 Esto se puede ver con el programa de test#0 
 
-[RbhwtRE0_0.py](RbhwtRE0_0.py)
+[Rbhwt_RE0_0.py](Rbhwt_RE0_0.py)
 
 ```
 Fin de la inicializacion.
