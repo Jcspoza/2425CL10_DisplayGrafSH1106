@@ -425,7 +425,7 @@ IMPORTANTE : hay que copiar la libreria writer.py al PICO y también el fichero 
 
 ---------
 
-### 3. Estudio de RE ==> PENDIENTE ESCRIBIR
+### 3. Estudio de RE
 
 Consultar los tutoriales
 
@@ -445,7 +445,7 @@ Cuando tocan la zona negra se conectan a GND, es decir 'blanco' 'blanco' = '00'
 
 Al estar las zonas negras decaladas la secuencia de ca,bio desde '11' indica el sentido del giro
 
-![](C:\Users\josec\OneDrive\Documentos\GitHub\2425CL10_DisplayGrafSH1106\Incremental_directional_encoder.gif)
+![](./Incremental_directional_encoder.gif)
 
 Esto se puede ver con el programa de test#0 
 
@@ -503,13 +503,13 @@ Tutorial base ( el mejor que he encontrado pero en ingles)
 
 Los rebotes (bounce en ingles) pueden hacer que **el uControlador interprete mas de 1 pulsación**
 
-![](C:\Users\josec\OneDrive\Documentos\GitHub\2425CL10_DisplayGrafSH1106\max-0019-01-switch-bounce-spst-1024x545.png)
+![](./max-0019-01-switch-bounce-spst-1024x545.png)
 
 Créditos: Imagen propiedad del articulo escrito por Max Maxfield
 
 Fotos reales hechas por mi
 
-| <img src="file:///C:/Users/josec/OneDrive/Documentos/GitHub/2425CL10_DisplayGrafSH1106/pulsaraGNDsincondesador2.jpg" title="" alt="" width="278"> | <img title="" src="./pulsaraGNDsincondesador.jpg" alt="" width="278"> |
+| <img src="./pulsaraGNDsincondesador2.jpg" title="" alt="" width="278"> | <img title="" src="./pulsaraGNDsincondesador.jpg" alt="" width="278"> |
 | ------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
 
 ### Solución HW : Circuito usado en el display SH1106+Re+3 pulsadores
@@ -534,7 +534,7 @@ Cálculos de un rebote hacia a arriba despues de pulsar
 
 <img src="./push.png" title="" alt="" width="431">
 
-![](C:\Users\josec\OneDrive\Documentos\GitHub\2425CL10_DisplayGrafSH1106\constantes-tiempo.png)
+![](./constantes-tiempo.png)
 
 ## Preguntas sobre la Clase 9 - 10 minutos
 
