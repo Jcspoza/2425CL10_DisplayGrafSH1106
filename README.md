@@ -106,11 +106,11 @@ No es gran cosa : [Raspberry Pi Pico/MicroPython exercise using SH1106 I2C OLED]
 
 **Conviene ver un tutorial de la mecánica de un RE**, vale cualquiera de los tutoriales hechos para arduino, como este
 
-[Rotary Encoders – Prometec](https://www.prometec.net/rotary-encoders/)
+[Rotary Encoders – Prometec](https://www.prometec.net/rotary-encoders/) (no seguir desde el codigo arduino )
 
-En realidad el funcionamiento es muy sencillo, y se puede ver con el programa
+o este en ingles
 
-AÑADIR
+[Rotary Encoder - Learning MicroPython](https://dmccreary.github.io/learning-micropython/sensors/10-rotary-encoder/)
 
 #### <u>Pulsadores</u>
 
@@ -134,8 +134,8 @@ AÑADIR
 | [writer.py](writer.py)                 | [micropython-font-to-py/writer/WRITER.md at master · peterhinch/micropython-font-to-py · GitHub](https://github.com/peterhinch/micropython-font-to-py/blob/master/writer/WRITER.md) | Programa principal de la libreria para escribir con varios tipos de letra | Writer         |
 | [freesans20.py](freesans20.py)         |                                                                                                                                                                                     | Fuente de letra tamaño 20 para usar con writer                            | Writer         |
 | [inkfree20.py](inkfree20.py)           |                                                                                                                                                                                     | Fuente de letra tamaño 20 para usar con writer. Generada por mi           | Writer         |
-| [rotary.py](rotary.py)                 | https://github.com/MikeTeachman/micropython-rotary                                                                                                                                  | Fichero core , independiente del uC                                       | Rotary Encoder |
-| [rotary_irq_rp2.py](rotary_irq_rp2.py) | https://github.com/MikeTeachman/micropython-rotary                                                                                                                                  | Fichero complementario dependiente del uC                                 | Rotary Encoder |
+| [rotary.py](rotary.py)                 | [@MikeTeachman  micropython-rotary](https://github.com/MikeTeachman/micropython-rotary)                                                                                             | Fichero core , independiente del uC                                       | Rotary Encoder |
+| [rotary_irq_rp2.py](rotary_irq_rp2.py) | [@MikeTeachman  micropython-rotary](https://github.com/MikeTeachman/micropython-rotary)                                                                                             | Fichero complementario dependiente del uC                                 | Rotary Encoder |
 
 ...
 
@@ -166,10 +166,6 @@ que aunque diseñada para los GUI mencionados anteriormente, se puede usar sola.
 Esta muy bien documentada en el readme de la libreria en github, en cuanto a como usar la libreria.
 
 [GitHub - miketeachman/micropython-rotary: MicroPython module to read a rotary encoder.](https://github.com/MikeTeachman/micropython-rotary)
-
-**Conviene ver un tutorial de la mecánica de un RE**, vale cualquiera de los tutoriales hechos para arduino, como este 
-
-[Rotary Encoders &#8211; Prometec](https://www.prometec.net/rotary-encoders/)
 
 ----
 
@@ -237,7 +233,7 @@ pushPul = Pin(PUSH, Pin.IN) # pull up por circuito
 | [Rbhwt_sh1106RE3sw_Test3sw1_0.py](Rbhwt_sh1106RE3sw_Test3sw1_0.py) | CONFIRM = GPIO18 / BACK = GPIO19 / PUSH = GPIO20 | Test de los 3 pulsadores usando interrupciones. NO usa el display           |
 | [Rbhwt_sh1106RE3sw_RE1_0.py](Rbhwt_sh1106RE3sw_RE1_0.py)           | TRA = GPIO16 / TRB = GPIO17                      | Test #1 Rotary Encoder con libreria.                                        |
 | **Programas secundarios**                                          | ----------                                       | --------------                                                              |
-| [Rbhwt_sh1106RE3sw_RE0_0.py](Rbhwt_sh1106RE3sw_RE0_0.py)           | R. Encoder GPIO16 & 17                           | T_RE_0 : super básico de RE, se observa la secuencia de bits al girar       |
+| [RbhwtRE0_0.py](RbhwtRE0_0.py)                                     | R. Encoder GPIO16 & 17                           | T_RE_0 : super básico de RE, se observa la secuencia de bits al girar       |
 | renc_lib_simple_limit.py                                           | R. Encoder GPIO16 & 17                           | Tre3: libreria con limites de incremento                                    |
 | renc_lib_simple_nolimit.py                                         | R. Encoder GPIO16 & 17                           | Tre4: libreria sin limites                                                  |
 
@@ -430,6 +426,68 @@ IMPORTANTE : hay que copiar la libreria writer.py al PICO y también el fichero 
 ---------
 
 ### 3. Estudio de RE ==> PENDIENTE ESCRIBIR
+
+Consultar los tutoriales
+
+**Conviene ver un tutorial de la mecánica de un RE**, vale cualquiera de los tutoriales hechos para arduino, como este
+
+[Rotary Encoders – Prometec](https://www.prometec.net/rotary-encoders/) (no seguir desde el codigo arduino )
+
+o este en ingles
+
+[Rotary Encoder - Learning MicroPython](https://dmccreary.github.io/learning-micropython/sensors/10-rotary-encoder/)
+
+En realidad el funcionamiento de un RE es muy sencillo, y se puede ver en este gif:
+
+Los pines TRA y TRB se conectan como una aguja de tocadiscos sobre los discos interior y exterior del dibujo, y estan con pull-up
+
+Cuando tocan la zona negra se conectan a GND, es decir 'blanco' 'blanco' = '00'
+
+Al estar las zonas negras decaladas la secuencia de ca,bio desde '11' indica el sentido del giro
+
+![](C:\Users\josec\OneDrive\Documentos\GitHub\2425CL10_DisplayGrafSH1106\Incremental_directional_encoder.gif)
+
+Esto se puede ver con el programa de test#0 
+
+[RbhwtRE0_0.py](RbhwtRE0_0.py)
+
+```
+Fin de la inicializacion.
+Gira el RE y veras cambiar la secuencia de los valores de los pines
+Si giras a derecha la secuencia tene el orden inverso de girar a al izquierda
+Secuencia de giro a la derecha : 11 -> 01 -> 00 -> 10 -> 11
+Secuencia de giro a la izquierda : 11 -> 10 -> 00 -> 01 -> 11
+[gire en sentido horario]
+11
+01
+00
+10
+[gire en sentido anti-horario]
+11
+10
+00
+01
+
+11
+```
+
+Pero este programa es poco útil, porque hay que incluir  :
+
+* Evitación de rebotes
+
+* Interrupciones para manejar los cambios de los pines de RE
+
+Eso ya lo ha hecho la libreria de [Mike Teachman](https://github.com/miketeachman)
+
+Libreria : [@MikeTeachman  micropython-rotary](https://github.com/MikeTeachman/micropython-rotary)
+
+
+
+#### 3.1 RE BHWT Test #1 con libreria
+
+[Rbhwt_sh1106RE3sw_RE1_0.py](Rbhwt_sh1106RE3sw_RE1_0.py)
+
+
 
 ### 4. Check de Pulsadores ==> PENDIENTE ESCRIBIR
 
