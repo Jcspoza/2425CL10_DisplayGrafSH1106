@@ -233,7 +233,7 @@ pushPul = Pin(PUSH, Pin.IN) # pull up por circuito
 | [Rbhwt_sh1106RE3sw_Test3sw1_0.py](Rbhwt_sh1106RE3sw_Test3sw1_0.py) | CONFIRM = GPIO18 / BACK = GPIO19 / PUSH = GPIO20 | Test de los 3 pulsadores usando interrupciones. NO usa el display           |
 | [Rbhwt_sh1106RE3sw_RE1_0.py](Rbhwt_sh1106RE3sw_RE1_0.py)           | TRA = GPIO16 / TRB = GPIO17                      | Test #1 Rotary Encoder con libreria.                                        |
 | **Programas secundarios**                                          | ----------                                       | --------------                                                              |
-| [RbhwtRE0_0.py](RbhwtRE0_0.py)                                     | R. Encoder GPIO16 & 17                           | T_RE_0 : super básico de RE, se observa la secuencia de bits al girar       |
+| [Rbhwt_RE0_0.py](Rbhwt_RE0_0.py)                                     | R. Encoder GPIO16 & 17                           | T_RE_0 : super básico de RE, se observa la secuencia de bits al girar       |
 | renc_lib_simple_limit.py                                           | R. Encoder GPIO16 & 17                           | Tre3: libreria con limites de incremento                                    |
 | renc_lib_simple_nolimit.py                                         | R. Encoder GPIO16 & 17                           | Tre4: libreria sin limites                                                  |
 
