@@ -40,7 +40,7 @@ Llegaremos a estudiar las librerías de display con GUI, pero en una clase poste
   
   - Estudio del display + escribir programas básicos de test (BHWT)
   
-  - Estudio de RE
+  - Estudio de Rotary Encoder (RE)
   
   - Check de Pulsadores
   
@@ -401,15 +401,25 @@ El programa font to py es capaz de convertir fuentes residiendo en el sistema op
 
 ------
 
-## Avanzado - Circuitos RC para evitar rebotes
+## Avanzado - Circuitos RC para evitar rebotes en pulsadores
 
-![](./push.png)
+### Circuito usado
 
-https://www.eejournal.com/article/ultimate-guide-to-switch-debounce-part-2/
+Este es el circuito usado en los 3 pulsadores que tiene el display:
 
-Una vez la alimentación estabilizada, el voltaje del condensador esta en 3,3volt . Una vez se pulsa el pulsador se activa el RC de bajada es = 100 ohm * 100nF = 10 us =>> a los 10usec el voltaje en condensador baja al 37% de Vcc = 1,21 que no es aun un '0' --> check
+NO CONSIDERAR la resistencia de 100ohm no cuenta, es solo una protección para las entradas del uC, que limita la corriente.
 
-Según el articulo los picos son de 1.5us de media y con máximo de 6.6 us, por los que los filtraría 
+**El circuito anti-rebotes No es el ideal, pero funciona en la bajada.**
+
+Según el articulo del tutorial los picos son de 1.5us de media y con máximo de 6.6 us, por lo que los 'alisaria' razonablemente, porque el circuito de carga tiene un RC 1000 veces mayor, y no daría tiempo a cargarse antes de la siguiente puesta a tierra, en el siguiente pico
+
+<img src="./push.png" title="" alt="" width="431">
+
+Tutorial base
+
+[ultimate-guide-to-switch-debounce](https://www.eejournal.com/article/ultimate-guide-to-switch-debounce-part-3/)
+
+![](C:\Users\josec\OneDrive\Documentos\GitHub\2425CL10_DisplayGrafSH1106\constantes-tiempo.png)
 
 ## Preguntas sobre la Clase 9 - 10 minutos
 
