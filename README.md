@@ -18,43 +18,77 @@ Llegaremos a estudiar las librerías de display con GUI, pero en una clase poste
 
 ## 2024-2025 Clase 10 - Indice - xx minutos
 
+- Antes de comprar
+
+- Plantearse objetivos iniciales
+
 - Info previa: Tutoriales, Librerías, Conexionado y Programas que vamos a seguir
 
-- Estudio del SH1106 + RE + 3pulsadores con Pico
+- Estudio del SH1106 + RE + 3pulsadores con Pico & escribir BHWT
   
-  - Antes de comprar
-    
-    - ¿Para qué?
-    
-    - Comprobar la disponibilidad de librerías y Tutoriales
+  1. Estudio del display + escribir programas básicos de test (BHWT)
   
-  - Plantearse objetivos iniciales
-    
-    - Display : clonar todos los Basic HW Test de ssd1306
-    
-    - Rotray Encoder : funcionamiento básico de Re con libreria
-    
-    - Pulsadores : probar con programas típicos de pulsador con interrupciones
-    
-    - Letras con tamaños y fuentes distintas: librería writer
+  2. Letras con tamaños distintos + escribir programas básicos de test (BHWT)
   
-  - Estudio del display + escribir programas básicos de test (BHWT)
+  3. Estudio de Rotary Encoder (RE) + escribir programas básicos de test (BHWT)
   
-  - Estudio de Rotary Encoder (RE)
-  
-  - Check de Pulsadores
-  
-  - Letras con tamaños distintos
+  4. Check de Pulsadores + recuperar/adaptar programas básicos de test (BHWT)
 
-## Info. previa : Tutoriales, Librerias, Conexionado y Programas que vamos a seguir
+- Avanzado - Circuitos RC para evitar rebotes en pulsadores 
+
+- Preguntas
+  
+  --------------------
+
+## Antes de comprar
+
+#### Para que
+
+Cuando compramos HW nuevo en robotica hay que preguntarse ¿para que?, porque a veces nos puede mas el deseo que la realidad del tiempo de que disponemos. De todas forma los componente no suelen ser caros, en este caso unos 5 euros en aliexpres (abril 2025)
+
+**Caso SH1106 =>** para proyectos en los que queramos tener **texto + gráficos sin color**
+
+1. Es el display gráfico más sencillo posible junto al SSD1306
+
+2. las 1.3 pulgadas lo hacen mas útil que el SSD1306 (que es muy popular, pero demasiado pequeño) para incorporar a proyectos en los que queramos tener gráficos o logos etc.
+
+3. Incluye 3 pulsadores y un Rotary Encoder, que son suficientes para disponer de entradas de control en nuestro proyecto
+
+#### Comprobar la disponibilidad de librerías y Tutoriales
+
+Ver abajo, **conclusión: hay suficientes librerías y estan bien documentadas**
+
+### Plantearse objetivos iniciales
+
+Hay 3 tipos de hw a considerar en este producto, luego habrá 3 objetivos 1 x cada hw. Adicionalmente con el display exploraremos mas tipos de letras:
+
+1. Display : clonar todos los BHWT de ssd1306
+
+2. RE : funcionamiento básico del Rotary Encoder con libreria
+
+3. Pulsadores : probar con interrupciones
+
+4. Display objetivo adicional : Letras con tamaños y fuentes distintas libreria writer
+
+## Info. previa : Conocimientos previos/ a adquirir,  Tutoriales, Librerías y Conexionado
 
 ### Link a aliexpres para compra
 
 [SH1106 1.3 pulgadas monocromo I2c](https://es.aliexpress.com/item/1005007728845587.html?spm=a2g0o.order_list.order_list_main.23.1f16194dbIkIVd&gatewayAdapt=glo2esp)
 
-### Tutoriales resumen
+### Conocimientos mínimos o a adquirir
 
-**En realidad me he seguido a mi mismo adaptando mi  clase del SSD1306**
+#### <u>Display</u>
+
+- Protocolo I2C básico ( adquirido ya con LCD) 
+
+- Coordenadas de la pantalla en framebuffer
+
+- Pizarra framebuffer : es una copia en la que se hacen los dibujos y luego se copian a la pantalla física.
+
+##### Tutoriales resumen Display SH1106
+
+**En realidad me he seguido a mi mismo adaptando mi  clase del SSD1306 CL23 – 22Nov.-13Dic 2023** [link a pdf](https://github.com/Jcspoza/CMM_Python_uP_PicoW/blob/main/CL23_OLED_ssd1306/CMM_BML_Taller_P_R2023_CL23_nl.pdf)
 
 Algunos tutos:
 
@@ -68,9 +102,31 @@ No esta mal : [Using various SSD1306 and SH1106 128x64 OLED displays on a Raspbe
 
 No es gran cosa : [Raspberry Pi Pico/MicroPython exercise using SH1106 I2C OLED](https://coxxect.blogspot.com/2022/08/raspberry-pi-picomicropython-exercise.html), usa una versión antigua de la libreria. SIEMPRE id a buscar al origen las librerías, si es posible
 
-### Librerías resumen
+#### <u>Rotary encoder</u>
 
-..
+**Conviene ver un tutorial de la mecánica de un RE**, vale cualquiera de los tutoriales hechos para arduino, como este
+
+[Rotary Encoders – Prometec](https://www.prometec.net/rotary-encoders/)
+
+En realidad el funcionamiento es muy sencillo, y se puede ver con el programa
+
+AÑADIR
+
+#### <u>Pulsadores</u>
+
+- Entender la parte mecánica de pulsadores de
+  
+  - 2 patas
+  
+  - 4 patas : que es que que viene en el kit, pero funciona como el de 2 patas duplicado
+  
+  - 3 patas con NO ( normally open) y NC (normally closed)
+
+- Entender el problema de los rebotes ( ver al final de la clase)
+
+- Interrupciones : qué son y porque se usan con los pulsadores ( y otros componentes que requieren respuesta inmediata)
+
+### Librerías resumen y detalle
 
 | Link a módulos                         | Link Github                                                                                                                                                                         | Notas - tutoriales                                                        | Libreria       |
 | -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------- | -------------- |
@@ -117,7 +173,7 @@ Esta muy bien documentada en el readme de la libreria en github, en cuanto a com
 
 ----
 
-### Conexiones - Configuración : i2c4_5
+### Conexiones usadas en los programas - Configuración : i2c4_5
 
 ![](./conector_sh1106.png)
 
@@ -191,41 +247,13 @@ pushPul = Pin(PUSH, Pin.IN) # pull up por circuito
 
 Tutoriales ya indicados
 
+------
+
 ## Estudio de SH1106+RE+3sw
 
-### Antes de comprar
+### 1. Estudio del display y elaboración de programas básicos de test  BHWT
 
-#### Para que
-
-Cuando compramos HW nuevo en robotica hay que preguntarse ¿para que?, porque a veces nos puede mas el deseo que la realidad del tiempo de que disponemos. De todas forma los componente no suelen ser caros, en este caso  unos 5 euros en aliexpres (abril 2025)
-
-**Caso SH1106 =>** para proyectos en los que queramos tener **texto + gráficos sin color**
-
-1. Es el display gráfico más sencillo posible junto al SSD1306
-
-2. las 1.3 pulgadas lo hacen mas útil que el SSD1306 (que es muy popular, pero demasiado pequeño) para incorporar a proyectos en los que queramos tener gráficos o logos etc.
-
-3. Incluye 3 pulsadores y un Rotary Encoder, que son suficientes para disponer de entradas de control en nuestro proyecto
-
-#### Comprobar la disponibilidad de librerías y Tutoriales
-
-Ver arriba: **conclusión hay suficientes librerías y estan bien documentadas**
-
-### Plantearse objetivos iniciales
-
-Hay 3 tipos de hw a considerar en este producto, luego habrá 3 objetivos 1  x cada hw. Adicionalmente con el display exploraremos mas tipos de letras:
-
-1. Display : clonar todos los BHWT de ssd1306
-
-2. RE : funcionamiento básico del Rotary Encoder  con libreria
-
-3. Pulsadores : probar con interrupciones
-
-4. Display objetivo adicional : Letras con tamaños y fuentes distintas libreria writer
-
-### Estudio del display con BHWT
-
-#### 1.Test del I2c => el uC 've' el display
+#### 1.1 Test del I2c => el uC 've' el display
 
 [Rbhwt_I2Cscan.py](Rbhwt_I2Cscan.py)
 
@@ -244,7 +272,7 @@ Scanning I2C bus.
 Decimal address: 60 , Hex address:  0x3c
 ```
 
-#### 2.Test básico SH1106
+#### 1.2.Test básico SH1106
 
 [Rbhwt_sh1106_1_0.py](Rbhwt_sh1106_1_0.py)
 
@@ -348,7 +376,7 @@ A continuación unos ejemplos de comandos a ejecutar en REPL
 # display.show()
 ```
 
-#### 3.Test gráfico completo de  SH1106
+#### 1.3.Test gráfico completo de  SH1106
 
 [Rbhwt_sh1106_showGraph_1_0.py](Rbhwt_sh1106_showGraph_1_0.py)
 
@@ -381,43 +409,72 @@ try:
             msgL8 = orden()
 ```
 
-### Letras con tamaños distintos
+**NOTA : no se han incluido por no alargar la clase, otros programas BHWT clonados de la clase 23 del display SSD1306, como ver una imagen, pero se ha hecho en su mayoría**
+
+### 2. Letras con tamaños distintos
 
 El inconveniente de las librerías de display grafico basadas en frambuffer, es que solo cuentan , de forma nativa, con 1 tipo de letra de 8x8. Para ampliar los tipos de letras existe la libreria writer, que esta dentro de :
 
 [micropython-font-to-py/writer/WRITER.md at master · peterhinch/micropython-font-to-py · GitHub](https://github.com/peterhinch/micropython-font-to-py/blob/master/writer/WRITER.md)
 
-que aunque diseñada para los GUI mencionados mas arriba, se puede usar sola.
+que aunque diseñada para los GUI mencionados al principio de esa lección, se puede usar sola.
 
-El programa font to py es capaz de convertir fuentes residiendo en el sistema operativo windows del PC, a fuentes 'usables' con displays. Lo he probado con la fuente 'inkfree' con resultados OK. El github tiene amplia documentación. Ver ejemplo en 
+El programa font to py es capaz de convertir fuentes residiendo en el sistema operativo windows del PC, a fuentes 'usables' con displays. Yo lo he probado con la fuente 'inkfree' con resultados OK. El github tiene amplia documentación. 
+
+He hecho un ejemplo en 
 
 [Rbhwt_sh1106_writer_1_0.py](Rbhwt_sh1106_writer_1_0.py)
 
+IMPORTANTE : hay que copiar la libreria writer.py al PICO y también el fichero de la fuente que queramos usar.
+
 ---------
 
-### Estudio de RE
+### 3. Estudio de RE ==> PENDIENTE ESCRIBIR
 
-### Check de Pulsadores
+### 4. Check de Pulsadores ==> PENDIENTE ESCRIBIR
 
 ------
 
 ## Avanzado - Circuitos RC para evitar rebotes en pulsadores
 
-### Circuito usado
+Tutorial base ( el mejor que he encontrado pero en ingles)
+
+[ultimate-guide-to-switch-debounce](https://www.eejournal.com/article/ultimate-guide-to-switch-debounce-part-3/)
+
+### Visualización del problema
+
+Los rebotes (bounce en ingles) pueden hacer que **el uControlador interprete mas de 1 pulsación**
+
+![](C:\Users\josec\OneDrive\Documentos\GitHub\2425CL10_DisplayGrafSH1106\max-0019-01-switch-bounce-spst-1024x545.png)
+
+Créditos: Imagen propiedad del articulo escrito por Max Maxfield
+
+Fotos reales hechas por mi
+
+| <img src="file:///C:/Users/josec/OneDrive/Documentos/GitHub/2425CL10_DisplayGrafSH1106/pulsaraGNDsincondesador2.jpg" title="" alt="" width="278"> | <img title="" src="./pulsaraGNDsincondesador.jpg" alt="" width="278"> |
+| ------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+
+### Solución HW : Circuito usado en el display SH1106+Re+3 pulsadores
 
 Este es el circuito usado en los 3 pulsadores que tiene el display:
 
 NO CONSIDERAR la resistencia de 100ohm no cuenta, es solo una protección para las entradas del uC, que limita la corriente.
 
-**El circuito anti-rebotes No es el ideal, pero funciona en la bajada.**
+**El circuito anti-rebotes usado No es el ideal, pero funciona bien en la bajada.**
 
-Según el articulo del tutorial los picos son de 1.5us de media y con máximo de 6.6 us, por lo que los 'alisaria' razonablemente, porque el circuito de carga tiene un RC 1000 veces mayor, y no daría tiempo a cargarse antes de la siguiente puesta a tierra, en el siguiente pico
+Según el articulo del tutorial  los picos son de 1.5us de media y con máximo de 6.6 us, por lo que los 'alisaria' razonablemente, porque el circuito de carga tiene un RC 1000 veces mayor, y no daría tiempo a cargarse antes de la siguiente puesta a tierra, en el siguiente rebote a '0'. 
+
+Dicho de otro modo como el circuito esta diseñado para que sea el '0' el que marque una pulsación al uC. El circuito baja rápido a '0' en aproximadamente 1 a 2 usec, pero sube lento como para confundirse con un '1', si se da un rebote hacia arriba
+
+Cálculos de un rebote hacia a arriba despues de pulsar
+
+    el nivel minimo de '1' ha de ser 2volt en la lógica 3,3 CMOS => 2volt/3.3 volt = 60%
+
+    en 1 RC el circuito de carga llega hasta el 63% ~~ 2 volt
+
+    Un rebote hacia arriba necesitaría durar un 1ms
 
 <img src="./push.png" title="" alt="" width="431">
-
-Tutorial base
-
-[ultimate-guide-to-switch-debounce](https://www.eejournal.com/article/ultimate-guide-to-switch-debounce-part-3/)
 
 ![](C:\Users\josec\OneDrive\Documentos\GitHub\2425CL10_DisplayGrafSH1106\constantes-tiempo.png)
 
@@ -425,4 +482,4 @@ Tutorial base
 
 Sección para que los alumnos pregunten sus dudas durante la clase
 
----- 
+---
