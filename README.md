@@ -233,7 +233,7 @@ pushPul = Pin(PUSH, Pin.IN) # pull up por circuito
 | [Rbhwt_sh1106RE3sw_Test3sw1_0.py](Rbhwt_sh1106RE3sw_Test3sw1_0.py) | CONFIRM = GPIO18 / BACK = GPIO19 / PUSH = GPIO20 | Test de los 3 pulsadores usando interrupciones. NO usa el display           |
 | [Rbhwt_sh1106RE3sw_RE1_0.py](Rbhwt_sh1106RE3sw_RE1_0.py)           | TRA = GPIO16 / TRB = GPIO17                      | Test #1 Rotary Encoder con libreria.                                        |
 | **Programas secundarios**                                          | ----------                                       | --------------                                                              |
-| [Rbhwt_RE0_0.py](Rbhwt_RE0_0.py)                                     | R. Encoder GPIO16 & 17                           | T_RE_0 : super básico de RE, se observa la secuencia de bits al girar       |
+| [Rbhwt_RE0_0.py](Rbhwt_RE0_0.py)                                   | R. Encoder GPIO16 & 17                           | T_RE_0 : super básico de RE, se observa la secuencia de bits al girar       |
 | renc_lib_simple_limit.py                                           | R. Encoder GPIO16 & 17                           | Tre3: libreria con limites de incremento                                    |
 | renc_lib_simple_nolimit.py                                         | R. Encoder GPIO16 & 17                           | Tre4: libreria sin limites                                                  |
 
@@ -443,7 +443,7 @@ Los pines TRA y TRB se conectan como una aguja de tocadiscos sobre los discos in
 
 Cuando tocan la zona negra se conectan a GND, es decir 'blanco' 'blanco' = '00'
 
-Al estar las zonas negras decaladas la secuencia de ca,bio desde '11' indica el sentido del giro
+Al estar las zonas negras decaladas la secuencia de cambio desde '11' indica el sentido del giro
 
 ![](./Incremental_directional_encoder.gif)
 
@@ -481,13 +481,9 @@ Eso ya lo ha hecho la libreria de [Mike Teachman](https://github.com/miketeachma
 
 Libreria : [@MikeTeachman  micropython-rotary](https://github.com/MikeTeachman/micropython-rotary)
 
-
-
 #### 3.1 RE BHWT Test #1 con libreria
 
 [Rbhwt_sh1106RE3sw_RE1_0.py](Rbhwt_sh1106RE3sw_RE1_0.py)
-
-
 
 ### 4. Check de Pulsadores ==> PENDIENTE ESCRIBIR
 
@@ -510,7 +506,7 @@ Créditos: Imagen propiedad del articulo escrito por Max Maxfield
 Fotos reales hechas por mi
 
 | <img src="./pulsaraGNDsincondesador2.jpg" title="" alt="" width="278"> | <img title="" src="./pulsaraGNDsincondesador.jpg" alt="" width="278"> |
-| ------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| ---------------------------------------------------------------------- | --------------------------------------------------------------------- |
 
 ### Solución HW : Circuito usado en el display SH1106+Re+3 pulsadores
 
