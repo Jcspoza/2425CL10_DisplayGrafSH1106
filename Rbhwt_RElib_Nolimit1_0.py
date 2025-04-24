@@ -1,5 +1,5 @@
 # Taller Programación y Robótica en CMM BML – 2024 -2025 - Clase xx
-# Programa: basic hw test Rotary Encoder con libreria - Test #1
+# Programa: basic hw test Rotary Encoder con libreria - Test #1 - SIN limite
 # Hardware platform: Pico _ & W / funciona igual sin cambios
 # Librerias : micropython-rotary
 # Ref librerias: https://github.com/MikeTeachman/micropython-rotary
@@ -22,23 +22,23 @@ from rotary_irq_rp2 import RotaryIRQ
 
 # 0- los 2 pines del Rotary Encoder, si el incremento es decremento -> invertir
 TRA = 16
-TRB = 19
+TRB = 17
 
 #1- Creacion  del objeto
 r = RotaryIRQ(
-    pin_num_clk=17,
-    pin_num_dt=16,
+    pin_num_clk=TRB,
+    pin_num_dt=TRA,
     reverse=False,
     incr=1,
     range_mode=RotaryIRQ.RANGE_UNBOUNDED,
-    # pull_up=True, # pull up por circuito
+    # pull_up=True, # si pull up por circuito -> comenta
     half_step=False,
     )
 
 print('---------------------------')
-print('Fin de la inicializacion.')
-print('Gira el RE y observa si el contador "steep" se incrementa o decrementa')
-val_old = r.value()
+print('Fin de la inicializacion : RANGE_UNBOUNDED')
+print('Gira el RE y observa si el contador "steep" se incrementa o decrementa SIN Limite')
+val_old = None 
 while True:
     val_new = r.value()
 

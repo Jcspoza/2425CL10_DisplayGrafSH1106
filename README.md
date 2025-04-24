@@ -224,18 +224,20 @@ pushPul = Pin(PUSH, Pin.IN) # pull up por circuito
 
 ### Tabla resumen de programas ejemplos o Basic HW Test
 
-| Programa - en uPython                                              | Configuración HW                                 | Objetivo del basic HW test                                                  |
-| ------------------------------------------------------------------ | ------------------------------------------------ | --------------------------------------------------------------------------- |
-| [Rbhwt_I2Cscan.py](Rbhwt_I2Cscan.py)                               | I2C en GPIO 4&5 = SDA0 & SCL0 a 400khz := i2c4_5 | Check de que el bus I2c esta ok, la dirección debe ser la 60, o en hex 0x3c |
-| [Rbhwt_sh1106_1_0.py](Rbhwt_sh1106_1_0.py)                         | i2c4_5                                           | Test T1: muestra un texto y un cuadrado                                     |
-| [Rbhwt_sh1106_writer_1_0.py](Rbhwt_sh1106_writer_1_0.py)           | i2c4_5                                           | Test # 1 de la libreria writer con freesans20 o inkfree20                   |
-| [Rbhwt_sh1106_showGraph_1_0.py](Rbhwt_sh1106_showGraph_1_0.py)     | i2c4_5                                           | Muestra un show de comandos gráficos de framebuffer                         |
-| [Rbhwt_sh1106RE3sw_Test3sw1_0.py](Rbhwt_sh1106RE3sw_Test3sw1_0.py) | CONFIRM = GPIO18 / BACK = GPIO19 / PUSH = GPIO20 | Test de los 3 pulsadores usando interrupciones. NO usa el display           |
-| [Rbhwt_sh1106RE3sw_RE1_0.py](Rbhwt_sh1106RE3sw_RE1_0.py)           | TRA = GPIO16 / TRB = GPIO17                      | Test #1 Rotary Encoder con libreria.                                        |
-| **Programas secundarios**                                          | ----------                                       | --------------                                                              |
-| [Rbhwt_RE0_0.py](Rbhwt_RE0_0.py)                                   | R. Encoder GPIO16 & 17                           | T_RE_0 : super básico de RE, se observa la secuencia de bits al girar       |
-| renc_lib_simple_limit.py                                           | R. Encoder GPIO16 & 17                           | Tre3: libreria con limites de incremento                                    |
-| renc_lib_simple_nolimit.py                                         | R. Encoder GPIO16 & 17                           | Tre4: libreria sin limites                                                  |
+| Programa - en uPython                                                | Configuración HW                                 | Objetivo del basic HW test                                                  |
+| -------------------------------------------------------------------- | ------------------------------------------------ | --------------------------------------------------------------------------- |
+| [Rbhwt_I2Cscan.py](Rbhwt_I2Cscan.py)                                 | I2C en GPIO 4&5 = SDA0 & SCL0 a 400khz := i2c4_5 | Check de que el bus I2c esta ok, la dirección debe ser la 60, o en hex 0x3c |
+| [Rbhwt_sh1106_1_0.py](Rbhwt_sh1106_1_0.py)                           | i2c4_5                                           | Test T1: muestra un texto y un cuadrado                                     |
+| [Rbhwt_sh1106_writer_1_0.py](Rbhwt_sh1106_writer_1_0.py)             | i2c4_5                                           | Test # 1 de la libreria writer con freesans20 o inkfree20                   |
+| [Rbhwt_sh1106_showGraph_1_0.py](Rbhwt_sh1106_showGraph_1_0.py)       | i2c4_5                                           | Muestra un show de comandos gráficos de framebuffer                         |
+| [R2023_CL9_switch_push_irq_3_0.py](R2023_CL9_switch_push_irq_3_0.py) | PUSH = GPIO20                                    | Test de pulsador PUSH  usando interrupciones. NO usa el display             |
+| [Rbhwt_3sw1_0.py](Rbhwt_3sw1_0.py)                                   | CONFIRM = GPIO18 / BACK = GPIO19 / PUSH = GPIO20 | Test de los 3 pulsadores usando interrupciones. NO usa el display           |
+| [Rbhwt_RElib_Nolimit1_0.py](Rbhwt_RElib_Nolimit1_0.py)               | TRA = GPIO16 / TRB = GPIO17                      | Test #1 Rotary Encoder con libreria sin limite                              |
+| HACER Y AÑADIR                                                       |                                                  | Test #4 RE con libreria, llama por handler                                  |
+| **Programas secundarios**                                            | ----------                                       | --------------                                                              |
+| [Rbhwt_RE0_0.py](Rbhwt_RE0_0.py)                                     | R. Encoder GPIO16 & 17                           | T_RE_0 : super básico de RE, se observa la secuencia de bits al girar       |
+| [Rbhwt_RElib_limitVuelve2.py](Rbhwt_RElib_limitVuelve2.py)           | R. Encoder GPIO16 & 17                           | Tre3: libreria con limites y Vuelve                                         |
+| [Rbhwt_RElib_limitPara3.py](Rbhwt_RElib_limitPara3.py)               | R. Encoder GPIO16 & 17                           | Tre4: libreria con Limite y Para                                            |
 
  ...
 
@@ -485,11 +487,93 @@ Eso ya lo ha hecho la libreria de [Mike Teachman](https://github.com/miketeachma
 
 Libreria : [@MikeTeachman  micropython-rotary](https://github.com/MikeTeachman/micropython-rotary)
 
-#### 3.1 RE BHWT Test #1 con libreria
+#### 3.1 RE BHWT Test #1 con libreria opcion sin limite
 
-[Rbhwt_sh1106RE3sw_RE1_0.py](Rbhwt_sh1106RE3sw_RE1_0.py)
+[Rbhwt_RElib_Nolimit1_0.py](Rbhwt_RElib_Nolimit1_0.py)
 
-### 4. Check de Pulsadores ==> PENDIENTE ESCRIBIR
+La libreria facilita las cosas, lo unico que hay que hacer es crear correctamente el objeto. Aqui puedes consultar las opciones del [constructor](https://github.com/miketeachman/micropython-rotary/tree/master#constructor)
+
+En el programa se usa 
+
+```
+#1- Creacion  del objeto
+r = RotaryIRQ(
+    pin_num_clk=TRA,
+    pin_num_dt=TRB,
+    reverse=False,
+    incr=1,
+    range_mode=RotaryIRQ.RANGE_UNBOUNDED,
+    # pull_up=True, # si pull up por circuito -> comenta
+    half_step=False,
+    )
+```
+
+#### 3.2 RE BHWT Test #2 con libreria - opción con limite y vuelve a empezar
+
+[Rbhwt_RElib_limitVuelve2.py](Rbhwt_RElib_limitVuelve2.py)
+
+En el programa se usa range_mode=RotaryIRQ.RANGE_WRAP,
+
+#### 3.3 RE BHWT Test #3 con libreria - opción con limite y para
+
+[Rbhwt_RElib_limitPara3.py](Rbhwt_RElib_limitPara3.py)
+
+En el programa se usa range_mode=RotaryIRQ.RANGE_BOUNDED
+
+### 4. 'Leer' de pulsadores con Interrupciones
+
+Los pulsadores con interrupciones ya ha sido explicados en la lección CL9 de 2003, asi que abre el [link a las transparencias de esa lección para repasarla](./Pulsadores_clase9_20203.pdf)
+
+#### 4.1 Leer un pulsador sin perder la cuenta de las veces pulsadas
+
+Se ha adaptado el programa de la CL9 de 2023, BMMR_CL9_switch_react_irq_3_0.py,  al pulsador  'PUSH' en GPIO20 con el pin con pull-up por HW y la interrupción respondiendo en bajada. Lo que hace simplemente es no perder la cuenta de las veces pulsadas
+
+[R2023_CL9_switch_push_irq_3_0.py](R2023_CL9_switch_push_irq_3_0.py)
+
+#### 4.2 Leer 3 pulsadores con interrupciones - usa mismo 'handler' para los 3
+
+Es una evolución del programa anterior con 3 pines programados con interrupción
+
+[Rbhwt_3sw1_0.py](Rbhwt_3sw1_0.py)
+
+<u>AVANZADO</u> : La parte interesante es como se identifica que pulsador es el responsable de la interrupción. Esto no se suele explicar en los tutoriales de interrupción
+
+```
+listaPul = ['confirm', 'back', 'push']
+
+.....
+def manejaPulsadores(pin):
+
+    global teclas, last_time
+    new_time = utime.ticks_ms()
+    # Si ha pasado mas de 200ms desde el ultimo evento, temenos un nuevo evento. Evita los REBOTES
+    if utime.ticks_diff(new_time, last_time) > 400: 
+        teclas.append(listaPul[int(str(pin).split(",")[0][8:]) - CONFIRM])
+        # Si la interrupcion vien del pulsador 'back' en GPIO19
+        # objeto 'pin' devuelve por ejemplo 'Pin(GPIO19, mode=IN)' si lo pasamos a str
+        # slip(",") parte por la coma en una lista ['Pin(GPIO19', ' mode=IN)']
+        # [0][8:] toma del primero de la lista los caracteres del 8 al final, y lo pasa a int
+        # 'Pin(GPIO19'[8:] -> '19'
+        # y resta el valor de CONFIRM = 18 , dando 1
+        # busca en listaPul[1] => 'back'
+        last_time = new_time
+
+confPul.irq(trigger=Pin.IRQ_FALLING, handler=manejaPulsadores)
+
+backPul.irq(trigger=Pin.IRQ_FALLING, handler=manejaPulsadores)
+
+pushPul.irq(trigger=Pin.IRQ_FALLING, handler=manejaPulsadores)
+```
+
+¿ Cómo lo hemso hecho ?
+
+1. Usamos la misma función 'handler' con los 3 pulsadores
+
+2. La función handler tiene por defecto como argumento el objeto Pin que la llama
+
+3. Desencriptando un poco el objeto Pin sabremos el numero GPIO
+
+4. Con el numero restando el mas bajo , obtenemos un indice en la lista de pulsadores
 
 ------
 
@@ -540,4 +624,4 @@ Cálculos de un rebote hacia a arriba despues de pulsar
 
 Sección para que los alumnos pregunten sus dudas durante la clase
 
---- 
+---

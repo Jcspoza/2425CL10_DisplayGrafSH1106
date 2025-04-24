@@ -21,7 +21,7 @@ from machine import Pin, I2C
 # import sh1106
 import utime  
 
-# 0. 1 Definition o 3 switchs
+# 0. 1 Definition de los 3 switchs
 listaPul = ['confirm', 'back', 'push']
 
 CONFIRM = 18
