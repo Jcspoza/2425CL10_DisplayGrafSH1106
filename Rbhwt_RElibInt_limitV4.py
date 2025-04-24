@@ -49,7 +49,9 @@ r = RotaryIRQ(
     half_step=False,
     )
 
-r.add_listener(manejaRE)
+# Añade el handler personalizado a las interrupciones la libreria RE 
+r.add_listener(manejaRE) # se llamará a 'manejaRE' en un cambio de paso en el rotary E.
+
 
 print('---------------------------')
 print('Fin de la inicializacion : con Handler y RANGE_WRAP')
