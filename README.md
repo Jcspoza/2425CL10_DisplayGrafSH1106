@@ -233,7 +233,7 @@ pushPul = Pin(PUSH, Pin.IN) # pull up por circuito
 | [R2023_CL9_switch_push_irq_3_0.py](R2023_CL9_switch_push_irq_3_0.py) | PUSH = GPIO20                                    | Test de pulsador PUSH  usando interrupciones. NO usa el display             |
 | [Rbhwt_3sw1_0.py](Rbhwt_3sw1_0.py)                                   | CONFIRM = GPIO18 / BACK = GPIO19 / PUSH = GPIO20 | Test de los 3 pulsadores usando interrupciones. NO usa el display           |
 | [Rbhwt_RElib_Nolimit1_0.py](Rbhwt_RElib_Nolimit1_0.py)               | TRA = GPIO16 / TRB = GPIO17                      | Test #1 Rotary Encoder con libreria sin limite                              |
-| HACER Y AÑADIR                                                       |                                                  | Test #4 RE con libreria, llama por handler                                  |
+| [Rbhwt_RElibInt_limitV4.py](Rbhwt_RElibInt_limitV4.py)               | TRA = GPIO16 / TRB = GPIO17                      | Test #4 RE con libreria, llama por handler                                  |
 | **Programas secundarios**                                            | ----------                                       | --------------                                                              |
 | [Rbhwt_RE0_0.py](Rbhwt_RE0_0.py)                                     | R. Encoder GPIO16 & 17                           | T_RE_0 : super básico de RE, se observa la secuencia de bits al girar       |
 | [Rbhwt_RElib_limitVuelve2.py](Rbhwt_RElib_limitVuelve2.py)           | R. Encoder GPIO16 & 17                           | Tre3: libreria con limites y Vuelve                                         |
@@ -514,11 +514,26 @@ r = RotaryIRQ(
 
 En el programa se usa range_mode=RotaryIRQ.RANGE_WRAP,
 
-#### 3.3 RE BHWT Test #3 con libreria - opción con limite y para
+#### 3.3 RE BHWT Test #3 con libreria - opción con limite y parar
 
 [Rbhwt_RElib_limitPara3.py](Rbhwt_RElib_limitPara3.py)
 
 En el programa se usa range_mode=RotaryIRQ.RANGE_BOUNDED
+
+#### 3.4 RE BHWT Test #4 con libreria - opción con limite y parar
+
+Es seguramente **la opción mas útil** en el caso de un programa complejo, porque usa interrupciones para cambiar el valor de 'step', y asi el programa principal no tiene que preocuparse de encuestar periódicamente: usa la misma estructura que leer pulsador con interrupciones.
+
+[Rbhwt_RElibInt_limitV4.py](Rbhwt_RElibInt_limitV4.py)
+
+Todo el 'truco' esta en **r.add_listener**( *función de  manejo personalizada*)
+
+```
+# Añade el handler personalizado a las interrupciones la libreria RE
+# se llamará a 'manejaRE' en un cambio de paso en el rotary E.
+
+r.add_listener(manejaRE)
+```
 
 ### 4. 'Leer' de pulsadores con Interrupciones
 
@@ -536,7 +551,7 @@ Es una evolución del programa anterior con 3 pines programados con interrupció
 
 [Rbhwt_3sw1_0.py](Rbhwt_3sw1_0.py)
 
-<u>AVANZADO</u> : La parte interesante es como se identifica que pulsador es el responsable de la interrupción. Esto no se suele explicar en los tutoriales de interrupción
+<u>AVANZADO</u> : La parte interesante es como se identifica qué pulsador es el responsable de la interrupción. Esto no se suele explicar en los tutoriales de interrupción
 
 ```
 listaPul = ['confirm', 'back', 'push']
@@ -565,7 +580,7 @@ backPul.irq(trigger=Pin.IRQ_FALLING, handler=manejaPulsadores)
 pushPul.irq(trigger=Pin.IRQ_FALLING, handler=manejaPulsadores)
 ```
 
-¿ Cómo lo hemso hecho ?
+¿ Cómo lo hemos hecho ?
 
 1. Usamos la misma función 'handler' con los 3 pulsadores
 

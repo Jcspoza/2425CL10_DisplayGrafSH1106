@@ -50,10 +50,13 @@ def manejaPulsadores(pin):
     # Si ha pasado mas de 200ms desde el ultimo evento, temenos un nuevo evento. Evita los REBOTES
     if utime.ticks_diff(new_time, last_time) > 400: 
         teclas.append(listaPul[int(str(pin).split(",")[0][8:]) - CONFIRM])
+        # Si la interrupcion vien del pulsador 'back' en GPIO19
         # objeto 'pin' devuelve por ejemplo 'Pin(GPIO19, mode=IN)' si lo pasamos a str
         # slip(",") parte por la coma en una lista ['Pin(GPIO19', ' mode=IN)']
         # [0][8:] toma del primero de la lista los caracteres del 8 al final, y lo pasa a int
-        # 'Pin(GPIO19'[8:] -> '19' 
+        # 'Pin(GPIO19'[8:] -> '19'
+        # y resta el valor de CONFIRM = 18 , dando 1
+        # busca en listaPul[1] => 'back'
         last_time = new_time
         
 confPul.irq(trigger=Pin.IRQ_FALLING, handler=manejaPulsadores)

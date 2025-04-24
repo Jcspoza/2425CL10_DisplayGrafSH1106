@@ -47,5 +47,5 @@ wri = Writer(ssd, inkfree20, verbose = False) # verbose = False to suppress cons
 Writer.set_textpos(ssd, 0, 0)  
 wri.printstring('Miercoles\n')
 wri.printstring('2 Abr 2025\n')
-wri.printstring('22.44pm')
+wri.printstring('.=----- 20:58 -----=.')
 ssd.show()
