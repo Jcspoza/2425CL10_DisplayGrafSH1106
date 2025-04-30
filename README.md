@@ -34,6 +34,8 @@ Llegaremos a estudiar las librerías de display con GUI, pero en una clase poste
   
   4. Check de Pulsadores + recuperar/adaptar programas básicos de test (BHWT)
 
+- Programa con los 4 aprendizajes juntos
+
 - Avanzado - Circuitos RC para evitar rebotes en pulsadores 
 
 - Preguntas
@@ -69,6 +71,8 @@ Hay 3 tipos de hw a considerar en este producto, luego habrá 3 objetivos 1 x ca
 3. Pulsadores : probar con interrupciones
 
 4. Display objetivo adicional : Letras con tamaños y fuentes distintas libreria writer
+
+5. Hacer un programa que incluya los 4 aprendizajes anteriores
 
 ## Info. previa : Conocimientos previos/ a adquirir,  Tutoriales, Librerías y Conexionado
 
@@ -589,6 +593,12 @@ pushPul.irq(trigger=Pin.IRQ_FALLING, handler=manejaPulsadores)
 3. Desencriptando un poco el objeto Pin sabremos el numero GPIO
 
 4. Con el numero restando el mas bajo , obtenemos un indice en la lista de pulsadores
+
+## 5. Programa con los 4 aprendizajes juntos
+
+Partiremos desl show graficp
+
+
 
 ------
 

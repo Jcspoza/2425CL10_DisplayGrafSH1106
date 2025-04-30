@@ -1,21 +1,21 @@
-# Taller Programación y Robótica en CMM BML – 2024 -2025 - Clase xx
-# Programa: Show graphic commnads I2C oledsh sh1106 & framebuffer library - Carrusel
+# Taller Programación y Robótica en CMM BML – 2024 -2025 - Clase 10
+# Programa: Show graphic commnads I2C oledsh sh1106 by Rotrary Encoder na 3 switch
 # Hardware platform: Pico _ & W / funciona igual sin cambios
 # Librerias : sh1106.py
 # Ref librerias: https://github.com/robert-hh/SH1106
 # Fecha JCSP 2023 03 09
 # Licencia : CC BY-NC-SA 4.0
-# Add Learning topics : Design a progrma to mange a menu + use functions as objets
+# Add Learning topics : Design a program to mange a menu + use functions as objets
 # Ref: https://www.coderdojotc.org/micropython/displays/graph/03-basic-drawing/
 # Ref 2 : https://www.esploradores.com/oledsh_ssd1306/
 # Ref 3 : https://docs.micropython.org/en/latest/library/framebuf.html
-# 1.0 va ok
+# 1.0 
 
 from os import uname
 # Informative block - start
-p_keyOhw = "SH1106 I2C en GPIO 4&5 = SDA0 & SCL0 400khz"
-p_project = "Graphic commands show carrusel -i2c 1-default pins"
-p_version = "1.0"
+p_keyOhw = "SH1106 I2C en GPIO4&5=SDA0 & SCL0 400khz + RE GPIO16/17 + 3switch 18,19 20"
+p_project = "Graphic commands show carrusel -with RE & e switchs"
+p_version = "2.0"
 p_library = "SH1106  @robert-hh"
 print(f"uPython version: {uname()[3]} ")
 print(f"uC: {uname()[4]} - Key other HW: {p_keyOhw}")
@@ -25,12 +25,55 @@ print(f"Key Library: {p_library}")
 from machine import Pin, I2C
 import sh1106
 import array # necesario para coor de poligonos 
-from utime import sleep_ms
+import time
+from rotary_irq_rp2 import RotaryIRQ
 
 # 0.0 - Constates y varaibles globales
 WIDTH =128 
 HEIGHT= 64
 FREQ = 400_000   # Try lowering this value in case of "Errno 5"
+
+
+# 0.1- los 2 pines del Rotary Encoder, si el incremento es decremento -> invertir
+TRA = 16
+TRB = 17
+
+# 0. 1 Definition de los 3 switchs
+listaPul = ['confirm', 'back', 'push']
+
+CONFIRM = 18
+BACK = 19
+PUSH = 20
+confPul = Pin(CONFIRM, Pin.IN) # pull up por circuito
+backPul = Pin(BACK, Pin.IN) # pull up por circuito
+pushPul = Pin(PUSH, Pin.IN) # pull up por circuito
+
+# 0.3 Configura interrupciones asociadas a los pulsadores
+teclas = [] # guarda las teclas presionadas
+last_time = 0 # guarda la ultima marca de tiempo en que se presiono el pulsador
+
+def manejaPulsadores(pin):
+    
+    global teclas, last_time
+    new_time = time.ticks_ms()
+    # Si ha pasado mas de 200ms desde el ultimo evento, temenos un nuevo evento. Evita los REBOTES
+    if time.ticks_diff(new_time, last_time) > 400: 
+        teclas.append(listaPul[int(str(pin).split(",")[0][8:]) - CONFIRM])
+        # Si la interrupcion vien del pulsador 'back' en GPIO19
+        # objeto 'pin' devuelve por ejemplo 'Pin(GPIO19, mode=IN)' si lo pasamos a str
+        # slip(",") parte por la coma en una lista ['Pin(GPIO19', ' mode=IN)']
+        # [0][8:] toma del primero de la lista los caracteres del 8 al final, y lo pasa a int
+        # 'Pin(GPIO19'[8:] -> '19'
+        # y resta el valor de CONFIRM = 18 , dando 1
+        # busca en listaPul[1] => 'back'
+        last_time = new_time
+        
+confPul.irq(trigger=Pin.IRQ_FALLING, handler=manejaPulsadores)
+
+backPul.irq(trigger=Pin.IRQ_FALLING, handler=manejaPulsadores)
+
+pushPul.irq(trigger=Pin.IRQ_FALLING, handler=manejaPulsadores)
+
 
 def show_rect():
     """Display in oledsh a rectangule 20 x 16"""
@@ -98,14 +141,26 @@ MENU = [show_rect,
 
       
 # 0.1 Objeto I2C y LCD
-# Mejor usa las configuraciones por defecto
-# I2C0  I2C(0, scl=Pin(5), sda=Pin(4), freq=400_000)
-# I2C1  I2C(1, scl=Pin(7), sda=Pin(6), freq=400_000)
 i2c = I2C(0, sda = Pin(4), scl = Pin(5), freq = FREQ)
 print('Info del bus i2c: ',i2c)
 
 oledsh = sh1106.SH1106_I2C(WIDTH, HEIGHT , i2c, addr = 0x3c, rotate = 0) # constructor - I2C direccion 3C por defecto
 oledsh.sleep(False)
+
+#1- Creacion  del objeto RE
+r = RotaryIRQ(
+    pin_num_clk=TRB,
+    pin_num_dt=TRA,
+    min_val=0,
+    max_val=(len(MENU)-1),
+    reverse=False,
+    incr=1,
+    range_mode=RotaryIRQ.RANGE_UNBOUNDED,
+    # pull_up=True, # si pull up por circuito -> comenta
+    half_step=False,
+    )
+
+
 # 1- Programa Principal - Presentacion
 oledsh.fill(0) # clear screen
 oledsh.show()
@@ -114,29 +169,35 @@ oledsh.fill(0)
 oledsh.text("Test", (WIDTH - len("Test")*8) // 2, 0)
 oledsh.text("de", (WIDTH - len("de")*8) // 2, 16)
 oledsh.text("Comand Graficos", (WIDTH - len("Comand Graficos")*8) // 2, 32)
-oledsh.text("version " + p_version, 0, 48)
+oledsh.text("version " + p_version, 0, 44)
+msgL8 = "Tecla->comenzar"
+oledsh.text(msgL8, (WIDTH - len(msgL8)*8) // 2, 55, 1)
 oledsh.show()
-sleep_ms(3000)
-oledsh.fill(0)
-oledsh.show()
-
-try:
-    while True:
+while True:
+    #utime.sleep(1)
+    if teclas != []:        
+        teclas = []
         oledsh.fill(0)
-        oledsh.text("Test de graficos",0,0,1)
         oledsh.show()
-        
-        for opcion in range(len(MENU)):
-            orden = MENU[opcion]
-            msgL8 = orden()
-            oledsh.text(msgL8, (WIDTH - len(msgL8)*8) // 2, 55, 1)
-            oledsh.show(True) # hace que se actualicen todas las paginas, si no no funciona
-            sleep_ms(5000)
-            oledsh.fill(0)
-            oledsh.text("Test de graficos",0,0,1)
-            oledsh.show()
-                   
-except KeyboardInterrupt: #  si CTRL+C se presiona - > limpiar display
-    oledsh.fill(0)
-    oledsh.show()
+        break
+
+# try:
+#     while True:
+#         oledsh.fill(0)
+#         oledsh.text("Test de graficos",0,0,1)
+#         oledsh.show()
+#         
+#         for opcion in range(len(MENU)):
+#             orden = MENU[opcion]
+#             msgL8 = orden()
+#             oledsh.text(msgL8, (WIDTH - len(msgL8)*8) // 2, 55, 1)
+#             oledsh.show(True) # hace que se actualicen todas las paginas, si no no funciona
+#             sleep_ms(5000)
+#             oledsh.fill(0)
+#             oledsh.text("Test de graficos",0,0,1)
+#             oledsh.show()
+#                    
+# except KeyboardInterrupt: #  si CTRL+C se presiona - > limpiar display
+#     oledsh.fill(0)
+#     oledsh.show()
 

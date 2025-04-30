@@ -27,13 +27,13 @@ listaPul = ['confirm', 'back', 'push']
 CONFIRM = 18
 BACK = 19
 PUSH = 20
-# confPul = Pin(CONFIRM, Pin.IN) # pull up por circuito
-# backPul = Pin(BACK, Pin.IN) # pull up por circuito
-# pushPul = Pin(PUSH, Pin.IN) # pull up por circuito
+confPul = Pin(CONFIRM, Pin.IN) # pull up por circuito
+backPul = Pin(BACK, Pin.IN) # pull up por circuito
+pushPul = Pin(PUSH, Pin.IN) # pull up por circuito
 
-confPul = Pin(CONFIRM, Pin.IN, Pin.PULL_UP) # pull up por sw
-backPul = Pin(BACK, Pin.IN, Pin.PULL_UP) # pull up por sw
-pushPul = Pin(PUSH, Pin.IN, Pin.PULL_UP) # pull up por sw
+# confPul = Pin(CONFIRM, Pin.IN, Pin.PULL_UP) # pull up por sw
+# backPul = Pin(BACK, Pin.IN, Pin.PULL_UP) # pull up por sw
+# pushPul = Pin(PUSH, Pin.IN, Pin.PULL_UP) # pull up por sw
 
 # 0.2 Internal led config for flashing
 intled = Pin("LED", Pin.OUT)
