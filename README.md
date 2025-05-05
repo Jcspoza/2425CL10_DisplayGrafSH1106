@@ -228,20 +228,21 @@ pushPul = Pin(PUSH, Pin.IN) # pull up por circuito
 
 ### Tabla resumen de programas ejemplos o Basic HW Test
 
-| Programa - en uPython                                                | Configuración HW                                 | Objetivo del basic HW test                                                  |
-| -------------------------------------------------------------------- | ------------------------------------------------ | --------------------------------------------------------------------------- |
-| [Rbhwt_I2Cscan.py](Rbhwt_I2Cscan.py)                                 | I2C en GPIO 4&5 = SDA0 & SCL0 a 400khz := i2c4_5 | Check de que el bus I2c esta ok, la dirección debe ser la 60, o en hex 0x3c |
-| [Rbhwt_sh1106_1_0.py](Rbhwt_sh1106_1_0.py)                           | i2c4_5                                           | Test T1: muestra un texto y un cuadrado                                     |
-| [Rbhwt_sh1106_writer_1_0.py](Rbhwt_sh1106_writer_1_0.py)             | i2c4_5                                           | Test # 1 de la libreria writer con freesans20 o inkfree20                   |
-| [Rbhwt_sh1106_showGraph_1_0.py](Rbhwt_sh1106_showGraph_1_0.py)       | i2c4_5                                           | Muestra un show de comandos gráficos de framebuffer                         |
-| [R2023_CL9_switch_push_irq_3_0.py](R2023_CL9_switch_push_irq_3_0.py) | PUSH = GPIO20                                    | Test de pulsador PUSH  usando interrupciones. NO usa el display             |
-| [Rbhwt_3sw1_0.py](Rbhwt_3sw1_0.py)                                   | CONFIRM = GPIO18 / BACK = GPIO19 / PUSH = GPIO20 | Test de los 3 pulsadores usando interrupciones. NO usa el display           |
-| [Rbhwt_RElib_Nolimit1_0.py](Rbhwt_RElib_Nolimit1_0.py)               | TRA = GPIO16 / TRB = GPIO17                      | Test #1 Rotary Encoder con libreria sin limite                              |
-| [Rbhwt_RElibInt_limitV4.py](Rbhwt_RElibInt_limitV4.py)               | TRA = GPIO16 / TRB = GPIO17                      | Test #4 RE con libreria, llama por handler                                  |
-| **Programas secundarios**                                            | ----------                                       | --------------                                                              |
-| [Rbhwt_RE0_0.py](Rbhwt_RE0_0.py)                                     | R. Encoder GPIO16 & 17                           | T_RE_0 : super básico de RE, se observa la secuencia de bits al girar       |
-| [Rbhwt_RElib_limitVuelve2.py](Rbhwt_RElib_limitVuelve2.py)           | R. Encoder GPIO16 & 17                           | Tre3: libreria con limites y Vuelve                                         |
-| [Rbhwt_RElib_limitPara3.py](Rbhwt_RElib_limitPara3.py)               | R. Encoder GPIO16 & 17                           | Tre4: libreria con Limite y Para                                            |
+| Programa - en uPython                                                | Configuración HW                                 | Objetivo del basic HW test                                                                                                                                                             |
+| -------------------------------------------------------------------- | ------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Rbhwt_I2Cscan.py](Rbhwt_I2Cscan.py)                                 | I2C en GPIO 4&5 = SDA0 & SCL0 a 400khz := i2c4_5 | Check de que el bus I2c esta ok, la dirección debe ser la 60, o en hex 0x3c                                                                                                            |
+| [Rbhwt_sh1106_1_0.py](Rbhwt_sh1106_1_0.py)                           | i2c4_5                                           | Test T1: muestra un texto y un cuadrado                                                                                                                                                |
+| [Rbhwt_sh1106_writer_1_0.py](Rbhwt_sh1106_writer_1_0.py)             | i2c4_5                                           | Test # 1 de la libreria writer con freesans20 o inkfree20                                                                                                                              |
+| [Rbhwt_sh1106_showGraph_1_0.py](Rbhwt_sh1106_showGraph_1_0.py)       | i2c4_5                                           | Muestra un show de comandos gráficos de framebuffer / Da error en alguna version de uPy con la funcion elipse dibujar cuartos / OK con versiones de uPy 1.24 y 1.25 en Pico 2 y pico W |
+| [Rbhwt_sh1106_showGraph_3_0.py](Rbhwt_sh1106_showGraph_3_0.py)       |                                                  | Show de comandos con Menu controlado por Rotary Encoder                                                                                                                                |
+| [R2023_CL9_switch_push_irq_3_0.py](R2023_CL9_switch_push_irq_3_0.py) | PUSH = GPIO20                                    | Test de pulsador PUSH  usando interrupciones. NO usa el display                                                                                                                        |
+| [Rbhwt_3sw1_0.py](Rbhwt_3sw1_0.py)                                   | CONFIRM = GPIO18 / BACK = GPIO19 / PUSH = GPIO20 | Test de los 3 pulsadores usando interrupciones. NO usa el display                                                                                                                      |
+| [Rbhwt_RElib_Nolimit1_0.py](Rbhwt_RElib_Nolimit1_0.py)               | TRA = GPIO16 / TRB = GPIO17                      | Test #1 Rotary Encoder con libreria sin limite                                                                                                                                         |
+| [Rbhwt_RElibInt_limitV4.py](Rbhwt_RElibInt_limitV4.py)               | TRA = GPIO16 / TRB = GPIO17                      | Test #4 RE con libreria, llama por handler                                                                                                                                             |
+| **Programas secundarios**                                            | ----------                                       | --------------                                                                                                                                                                         |
+| [Rbhwt_RE0_0.py](Rbhwt_RE0_0.py)                                     | R. Encoder GPIO16 & 17                           | T_RE_0 : super básico de RE, se observa la secuencia de bits al girar                                                                                                                  |
+| [Rbhwt_RElib_limitVuelve2.py](Rbhwt_RElib_limitVuelve2.py)           | R. Encoder GPIO16 & 17                           | Tre3: libreria con limites y Vuelve                                                                                                                                                    |
+| [Rbhwt_RElib_limitPara3.py](Rbhwt_RElib_limitPara3.py)               | R. Encoder GPIO16 & 17                           | Tre4: libreria con Limite y Para                                                                                                                                                       |
 
  ...
 
@@ -596,9 +597,15 @@ pushPul.irq(trigger=Pin.IRQ_FALLING, handler=manejaPulsadores)
 
 ## 5. Programa con los 4 aprendizajes juntos
 
-Partiremos desl show graficp
+[Rbhwt_sh1106_showGraph_3_0.py](Rbhwt_sh1106_showGraph_3_0.py)
 
+Partiremos del show grafico versión 1.0 haciendo los siguientes cambios, que incorporaremos de forma progresiva chequeando que funcionen
 
+1. Quitamos las esperas temporizadas --> se espera a pulsar un botón
+
+2. El menú de opciones se postrara con el rotary encoder ( modo wrap)
+
+3. Evolucionaremos el menú a letra mas grande
 
 ------
 
@@ -650,3 +657,11 @@ Cálculos de un rebote hacia a arriba despues de pulsar
 Sección para que los alumnos pregunten sus dudas durante la clase
 
 ---
+
+## TODO
+
+Investigar extensión de framebuffer : [GitHub - peter-l5/framebuf2: MicroPython FrameBuffer extension: larger and rotated font, triangles and circles](https://github.com/peter-l5/framebuf2)
+
+Investigar porque ellipse es distinto en pico2 y en picow=-> no funciona igual lo de los cuartos
+
+    comprobado que va OK en PIco2 y Pico W versionse de uPy 1.25, y 1.24 en Pico W Evolucionaremso el menu a letra mas grande

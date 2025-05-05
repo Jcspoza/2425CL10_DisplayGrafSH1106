@@ -20,7 +20,7 @@ from os import uname
 # Informative block - start
 p_keyOhw = "SH1106 I2C en GPIO4&5=SDA0 & SCL0 400khz + RE GPIO16/17 + 3switch 18,19 20"
 p_project = "Graphic commands show carrusel -with RE & e switchs"
-p_version = "2.2"
+p_version = "2.3"
 p_library = "SH1106  @robert-hh"
 print(f"uPython version: {uname()[3]} ")
 print(f"uC: {uname()[4]} - Key other HW: {p_keyOhw}")
@@ -134,26 +134,17 @@ def show_pentagono():
     oledsh.poly(0, 10, cor, 1) # x0, y0, coor[x0,y0, x1,y1, x2, y2...], color
     return "Pentagon (63,10)"
 
-MENU = [show_rect,
-        show_circ,
-        show_ellipse,
-        show_triangle,
-        show_pentagono,
-        show_Frect,
-        show_QFellipse,
-        show_invert,
-        show_normal]
+MENU = [[show_rect, 'Rectangulo'],
+        [show_circ,'Circulo'],
+        [show_ellipse, 'Elipse'],
+        [show_triangle, 'Triangulo'],
+        [show_pentagono, 'Pentagono'],
+        [show_Frect, 'Rect lleno'],
+        [show_QFellipse, 'Elipse 2q'],
+        [show_invert, 'Invertido'],
+        [show_normal, 'Normal']]
 
-MENUtxt = ['Rectangulo',
-           'Circulo',
-           'Elipse',
-           'Triangulo',
-           'Pentagono',
-           'Rect lleno',
-           'Elipse 2q',
-           'Invertido',
-           'Normal']
- 
+
 # 0.1 Objeto I2C y LCD
 i2c = I2C(0, sda = Pin(4), scl = Pin(5), freq = FREQ)
 print('Info del bus i2c: ',i2c)
@@ -201,21 +192,29 @@ try:
     while True:
         oledsh.fill(0)
         oledsh.text("Test de graficos",0,0,1)
-        msgL4 = MENUtxt[opcion]
+        msgL4 = MENU[opcion][1]
         oledsh.text(msgL4, (WIDTH - len(msgL4)*8) // 2, 32, 1)
-        msgL8 = 'Ejecutar->Push'
+        msgL8 = 'Ver->Confirm'
         oledsh.text(msgL8, (WIDTH - len(msgL8)*8) // 2, 55, 1)
         oledsh.show(True) # hace que se actualicen todas las paginas, si no no funciona
         opcion = r.value()
-        if teclas != [] and teclas[0] == 'push':
+        if teclas != [] and teclas[0] == 'confirm':
             teclas = []
             oledsh.fill(0)
-            orden = MENU[opcion]
-            msgL8 = orden()
+            orden = MENU[opcion][0]
+            msgL1 = orden()
+            msgL8 = 'Volver->Back'
+            oledsh.text(msgL1, (WIDTH - len(msgL1)*8) // 2, 0, 1)
             oledsh.text(msgL8, (WIDTH - len(msgL8)*8) // 2, 55, 1)
             oledsh.show(True) # hace que se actualicen todas las paginas, si no no funciona
-            time.sleep_ms(2000)
-                               
+            while not('back' in teclas):
+                pass
+            teclas = []
+#             while True:
+#                 if :
+#                     teclas = []
+#                     break
+                                           
 except KeyboardInterrupt: #  si CTRL+C se presiona - > limpiar display
     oledsh.fill(0)
     oledsh.show()
