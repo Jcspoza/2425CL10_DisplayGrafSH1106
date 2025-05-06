@@ -232,6 +232,7 @@ pushPul = Pin(PUSH, Pin.IN) # pull up por circuito
 | ------------------------------------------------------------------------ | --------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | [Rbhwt_I2Cscan.py](Rbhwt_I2Cscan.py)                                     | I2C en GPIO 4&5 = SDA0 & SCL0 a 400khz := i2c4_5                                        | Check de que el bus I2c esta ok, la dirección debe ser la 60, o en hex 0x3c                                                                                                            |
 | [Rbhwt_sh1106_1_0.py](Rbhwt_sh1106_1_0.py)                               | i2c4_5                                                                                  | Test T1: muestra un texto y un cuadrado                                                                                                                                                |
+| [RmicC_sh1106_1_0.py](RminC_sh1106_1_0.py)                               | i2c4_5                                                                                  | **Codigo minimo** para usar el display en tus progrmas                                                                                                                                 |
 | [Rbhwt_sh1106_writer_1_0.py](Rbhwt_sh1106_writer_1_0.py)                 | i2c4_5                                                                                  | Test # 1 de la libreria writer con freesans20 o inkfree20                                                                                                                              |
 | [Rbhwt_sh1106_showGraph_1_0.py](Rbhwt_sh1106_showGraph_1_0.py)           | i2c4_5                                                                                  | Muestra un show de comandos gráficos de framebuffer / Da error en alguna version de uPy con la funcion elipse dibujar cuartos / OK con versiones de uPy 1.24 y 1.25 en Pico 2 y pico W |
 | [Rbhwt_sh1106RE3sw_showGraph_3_0.py](Rbhwt_sh1106RE3sw_showGraph_3_0.py) | i2c4_5 / CONFIRM = GPIO18 / BACK = GPIO19 / PUSH = GPIO20 / TRA = GPIO16 / TRB = GPIO17 | Show de comandos con Menu controlado por Rotary Encoder                                                                                                                                |
@@ -255,6 +256,10 @@ Tutoriales ya indicados
 ## Estudio de SH1106+RE+3sw
 
 ### 1. Estudio del display y elaboración de programas básicos de test  BHWT
+
+#### 1.0 Codigo minimo para usar el display en tus progrmas
+
+[RmicC_sh1106_1_0.py](RminC_sh1106_1_0.py)
 
 #### 1.1 Test del I2c => el uC 've' el display
 
@@ -346,37 +351,39 @@ Veamos como se inicializa el display , como se le ordena la escritura de textos 
 
 Una vez ejecutado este test básico como el objeto display se queda 'vivo' se pueden probar otros métodos de dibujo y de texto en el display. Recordar que siempre hay que acabar con `display.show()` para mostrar los últimos cambios.
 
-A continuación unos ejemplos de comandos a ejecutar en REPL
+A continuación unos ejemplos de comandos que se pueden probar en REPL o en un programa
 
 ```
-# The following codes should be tested using the REPL.
-# #1. To print a string:  
-# display.text('Hello world', 0, 0)
-# #2. To display all the commands in queue:     
+# RESUMEN DE COMANDOS -> borrar en un progrma real
+# Ver para una lista completa de comandos
+# Ref librerias: https://github.com/robert-hh/SH1106
+#1. Escribir un string
+# display.text('Hello world', 0, 0) # por defecto el color es '1' = blanco
+#2. Una 'ristra' de comandos solo se visualizaran con :     
 # display.show() 
-# #3. Now to clear the oled display:  
-# display.fill(0) 
+#3. Limpiar la pantalla:  
+# display.fill(0) # color '0'= negro
 # display.show() 
-# #4. You may also use the invert function to invert the display.  
-# display.invert(1) 
-# #5.To display a single pixel.  
+#4. Invertir el color: los puntos negros pasan a blanco y viceversa.  
+# display.invert(1) # no require show()
+#5.To display a single pixel.  
 # display.pixel(10,20,1) 
-# display.show() 
-# #6. To display a horizontal line  
+#6. To display a horizontal line  
 # display.hline(30,40,10,1) 
-# display.show() 
-# #7. To display a vertical line  
+#7. To display a vertical line  
 # display.vline(30,45,5,1) 
-# display.show() 
-# #8. While hline and vline is quite useful, there is another function that is more flexible to use which is the line function.  
+#8. Linea generica  
 # display.line(0,50,10,50,1) 
-# display.show() 
-# #9.We may also be able to print a rectangle.  
+#9. Rectangle.  
 # display.rect(10,60,10,5,1) 
-# display.show() 
-# #10. Or we may also print a filled rectangle:  
-# display.fill_rect(10,70,10,5,1) 
-# display.show()
+#10. Filled rectangle:  
+# display.fill_rect(10,70,10,5,1)
+#11. para rotar display en ejecucion
+# display.flip(True)
+# display.flip(False) vuelve a la rotacion inicial en la creacion
+#12. Apagar/encender el display SIN borrar la memoria
+# display.poweroff()
+# encender : display.poweron()
 ```
 
 #### 1.3.Test gráfico completo de  SH1106
@@ -598,8 +605,6 @@ pushPul.irq(trigger=Pin.IRQ_FALLING, handler=manejaPulsadores)
 ## 5. Programa con los 4 aprendizajes juntos
 
 [Rbhwt_sh1106RE3sw_showGraph_3_0.py](Rbhwt_sh1106RE3sw_showGraph_3_0.py)
-
-
 
 Partiremos del show grafico versión 1.0 haciendo los siguientes cambios, que incorporaremos de forma progresiva chequeando que funcionen
 
