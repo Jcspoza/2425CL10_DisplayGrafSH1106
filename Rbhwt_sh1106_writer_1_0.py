@@ -23,7 +23,7 @@ from sh1106 import SH1106_I2C
 from writer import Writer
 
 # Font
-import inkfree20
+import freesans20 as font
 
 WIDTH = const(128)
 HEIGHT = const(64)
@@ -43,7 +43,7 @@ ssd.line(rhs - 20, 0, rhs, 20, 1)
 square_side = 10
 ssd.fill_rect(rhs - square_side, 0, square_side, square_side, 1)
 
-wri = Writer(ssd, inkfree20, verbose = False) # verbose = False to suppress console output
+wri = Writer(ssd, font, verbose = False) # verbose = False to suppress console output
 Writer.set_textpos(ssd, 0, 0)  
 wri.printstring('Miercoles\n')
 wri.printstring('2 Abr 2025\n')

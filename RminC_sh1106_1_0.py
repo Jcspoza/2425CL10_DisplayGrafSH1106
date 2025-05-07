@@ -17,7 +17,7 @@ display = sh1106.SH1106_I2C(WIDTH,
                             i2c,
                             res = None,
                             addr = 0x3c,
-                            rotate = 0) # valores 0, 90, 180, 270
+                            rotate = 180) # valores 0, 90, 180, 270
 display.sleep(False) # equivale a encender el display
 # se puede usar alternativamentge : display.poweron()
 display.fill(0)
